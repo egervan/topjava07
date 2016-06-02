@@ -41,7 +41,6 @@ public class UserMealsUtil {
         {
             UserMeal meal = iterator.next();
 
-            if(TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
             {
                 if (!mapMeals.containsKey(meal.getDateTime().toLocalDate()))
                 {
@@ -66,6 +65,7 @@ public class UserMealsUtil {
 
             for(UserMeal meal : entry.getValue())
             {
+                if(TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
                 resultList.add(new UserMealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), isExceed));
             }
         }
