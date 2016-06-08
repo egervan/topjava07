@@ -1,31 +1,41 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Meal list</title>
 </head>
 <body>
-<h2><a href="index.html">Home</a></h2>
-<h2>Meal list size ${mealList.size()}</h2>
-<table border="1">
-    <thead>
+<div align="center">
+    <h2><a href="index.html">Home</a></h2>
+    <h2>Updated Meal list size ${mealList.size()}</h2>
+    <table border="1">
+        <thead>
         <tr>
             <th>Date</th>
             <th>Description</th>
             <th>Calories</th>
             <th>Exceed</th>
         </tr>
-    </thead>
+        </thead>
 
-    <c:forEach items="${mealList}" var="meal">
-       <tr>
-        <td>${meal.dateTime}</td>
-        <td>${meal.description}</td>
-        <td>${meal.calories}</td>
-        <td>${meal.exceed}</td>
-       </tr>
-    </c:forEach>
-</table>
+        <c:forEach items="${mealList}" var="meal">
 
+            <tr bgcolor=
+            <c:if test="${meal.exceed}">"red"</c:if>
+            <c:if test="${!meal.exceed}">"lawngreen"</c:if>
+            >
+            <td>
+                <c:set var="dateInString" value="${fn:replace(meal.dateTime, 'T', ' ')}"/>
+                ${dateInString}
+            </td>
+            <td>${meal.description}</td>
+            <td>${meal.calories}</td>
+            <td>${meal.exceed}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 </body>
 </html>
