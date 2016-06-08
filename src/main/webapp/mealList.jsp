@@ -13,6 +13,7 @@
     <table border="1">
         <thead>
         <tr>
+            <th>id</th>
             <th>Date</th>
             <th>Description</th>
             <th>Calories</th>
@@ -26,6 +27,7 @@
             <c:if test="${meal.exceed}">"red"</c:if>
             <c:if test="${!meal.exceed}">"lawngreen"</c:if>
             >
+            <td>${meal.id}</td>
             <td>
                 <c:set var="dateInString" value="${fn:replace(meal.dateTime, 'T', ' ')}"/>
                 ${dateInString}
