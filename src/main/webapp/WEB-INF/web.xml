@@ -35,4 +35,15 @@
         <url-pattern>/deleteMeal</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>createMealServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.CreateMealServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>createMealServlet</servlet-name>
+        <url-pattern>/createMeal</url-pattern>
+    </servlet-mapping>
+
 </web-app>

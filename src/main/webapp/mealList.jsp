@@ -8,9 +8,9 @@
 </head>
 <body>
 <div align="center">
-    <h2><a href="index.html">Home</a></h2>
-    <h2>Updated Meal list size ${mealMap.size()}</h2>
-    <table border="1">
+       <h2><a href="index.html">Home</a></h2>
+       <h2>Updated Meal list size ${mealMap.size()}</h2>
+      <table border="1">
         <thead>
         <tr>
             <th>id</th>
@@ -18,6 +18,7 @@
             <th>Description</th>
             <th>Calories</th>
             <th>Exceed</th>
+            <th>Delete</th>
         </tr>
         </thead>
 
@@ -43,7 +44,14 @@
             </td>
             </tr>
         </c:forEach>
-    </table>
+      </table>
+
+    <form action="${pageContext.request.contextPath}/createMeal" method="post">
+       Date and time: <input type="datetime-local" name="datetime"/>
+       Description: <input type="text" name="description"/>
+       Calories <input type="number" name="calories"/>
+        <input type="submit" value="Add"/>
+    </form>
 </div>
 </body>
 </html>
