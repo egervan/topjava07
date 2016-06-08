@@ -35,6 +35,12 @@
             <td>${meal.value.description}</td>
             <td>${meal.value.calories}</td>
             <td>${meal.value.exceed}</td>
+            <td>
+                <form action="${pageContext.request.contextPath}/deleteMeal" method="post">
+                    <input type="number" name="id" value="${meal.key}" hidden/>
+                    <input type="submit" value="delete"/>
+                </form>
+            </td>
             </tr>
         </c:forEach>
     </table>

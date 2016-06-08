@@ -22,13 +22,13 @@ import static org.slf4j.LoggerFactory.getLogger;
  * Created by nz on 08.06.16.
  */
 public class MealServlet extends HttpServlet {
-    private static final Logger LOG = getLogger(UserServlet.class);
+    private static final Logger LOG = getLogger(MealServlet.class);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOG.debug("redirect to mealList");
 
 
-        MealDao mealDao = new MealDaoImpl(UserMealsUtil.getAllMeal());
+        MealDao mealDao = new MealDaoImpl();
         Map<Integer, UserMealWithExceed> mealsWithExceed = mealDao.getMealWithExceed(2000);
 //        List<UserMeal> mealWithoutExceed = UserMealsUtil.getAllMeal();
 //        request.getRequestDispatcher("/userList.jsp").forward(request, response);

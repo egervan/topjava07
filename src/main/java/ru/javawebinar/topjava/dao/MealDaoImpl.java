@@ -17,9 +17,22 @@ public class MealDaoImpl implements MealDao {
 
     private static volatile Map<Integer, UserMeal> mapMeal;
 
-    public MealDaoImpl(List<UserMeal> mealList) {
-       mapMeal = mealList.stream().collect(Collectors.toMap(UserMeal::getId, userMeal -> userMeal));
-    }
+    public MealDaoImpl() {
+        if(mapMeal == null)
+        {
+            mapMeal = UserMealsUtil.getAllMeal()
+                    .stream()
+                    .collect(Collectors
+                    .toMap(UserMeal::getId, userMeal -> userMeal));
+        }
+    }/*public MealDaoImpl(List<UserMeal> mealList) {
+       if(mapMeal == null)
+       {
+           mapMeal = mealList.stream()
+                   .collect(Collectors
+                           .toMap(UserMeal::getId, userMeal -> userMeal));
+       }
+    }*/
 
     @Override
     public synchronized void createMeal(UserMeal userMeal) {
