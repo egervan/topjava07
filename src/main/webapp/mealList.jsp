@@ -18,6 +18,7 @@
             <th>Description</th>
             <th>Calories</th>
             <th>Exceed</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -36,6 +37,12 @@
             <td>${meal.value.description}</td>
             <td>${meal.value.calories}</td>
             <td>${meal.value.exceed}</td>
+            <td>
+                <form action="${pageContext.request.contextPath}/updateMeal" method="get">
+                    <input type="number" name="id" value="${meal.key}" hidden/>
+                    <input type="submit" value="edit"/>
+                </form>
+            </td>
             <td>
                 <form action="${pageContext.request.contextPath}/deleteMeal" method="post">
                     <input type="number" name="id" value="${meal.key}" hidden/>

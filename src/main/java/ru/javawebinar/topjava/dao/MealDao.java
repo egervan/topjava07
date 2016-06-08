@@ -11,7 +11,7 @@ import java.util.Map;
 public interface MealDao {
     void createMeal(UserMeal userMeal);
     UserMeal readMeal(int id);
-    void updateMeal(UserMealWithExceed userMealWithExceed);
+    void updateMeal(UserMeal userMeal);
     void delete(int id);
     Map<Integer, UserMeal> getAllMeals();
     Map<Integer, UserMealWithExceed> getMealWithExceed(int caloriesPerDay);

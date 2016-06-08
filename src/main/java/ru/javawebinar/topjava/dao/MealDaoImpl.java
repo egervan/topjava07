@@ -45,8 +45,8 @@ public class MealDaoImpl implements MealDao {
     }
 
     @Override
-    public synchronized void updateMeal(UserMealWithExceed userMealWithExceed) {
-        mapMeal.put(userMealWithExceed.getId(), UserMealsUtil.createWithoutExceed(userMealWithExceed));
+    public synchronized void updateMeal(UserMeal userMeal) {
+        mapMeal.put(userMeal.getId(), userMeal);
     }
 
     @Override
