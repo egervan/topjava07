@@ -77,6 +77,10 @@ public class UserMealsUtil {
         return new UserMealWithExceed(um.getId(), um.getDateTime(), um.getDescription(), um.getCalories(), exceeded);
     }
 
+    public static UserMeal createWithoutExceed(UserMealWithExceed um) {
+        return new UserMeal(um.getId(), um.getDateTime(), um.getDescription(), um.getCalories());
+    }
+
     public static List<UserMeal> getAllMeal()
     {
          return meals;

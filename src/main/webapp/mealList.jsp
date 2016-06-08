@@ -9,7 +9,7 @@
 <body>
 <div align="center">
     <h2><a href="index.html">Home</a></h2>
-    <h2>Updated Meal list size ${mealList.size()}</h2>
+    <h2>Updated Meal list size ${mealMap.size()}</h2>
     <table border="1">
         <thead>
         <tr>
@@ -21,20 +21,20 @@
         </tr>
         </thead>
 
-        <c:forEach items="${mealList}" var="meal">
+        <c:forEach items="${mealMap}" var="meal">
 
             <tr bgcolor=
-            <c:if test="${meal.exceed}">"red"</c:if>
-            <c:if test="${!meal.exceed}">"lawngreen"</c:if>
+            <c:if test="${meal.value.exceed}">"red"</c:if>
+            <c:if test="${!meal.value.exceed}">"lawngreen"</c:if>
             >
-            <td>${meal.id}</td>
+            <td>${meal.key}</td>
             <td>
-                <c:set var="dateInString" value="${fn:replace(meal.dateTime, 'T', ' ')}"/>
+                <c:set var="dateInString" value="${fn:replace(meal.value.dateTime, 'T', ' ')}"/>
                 ${dateInString}
             </td>
-            <td>${meal.description}</td>
-            <td>${meal.calories}</td>
-            <td>${meal.exceed}</td>
+            <td>${meal.value.description}</td>
+            <td>${meal.value.calories}</td>
+            <td>${meal.value.exceed}</td>
             </tr>
         </c:forEach>
     </table>

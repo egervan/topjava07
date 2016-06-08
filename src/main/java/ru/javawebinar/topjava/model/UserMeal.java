@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  * 11.01.2015.
  */
 public class UserMeal {
-    private static int staticId;
+    private static volatile int staticId;
 
     protected final int id;
 
@@ -19,6 +19,13 @@ public class UserMeal {
 
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this.id = ++staticId;
+        this.dateTime = dateTime;
+        this.description = description;
+        this.calories = calories;
+    }
+
+    public UserMeal(int id, LocalDateTime dateTime, String description, int calories) {
+        this.id = id;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;

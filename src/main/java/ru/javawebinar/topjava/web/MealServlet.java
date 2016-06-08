@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
+import ru.javawebinar.topjava.dao.MealDao;
+import ru.javawebinar.topjava.dao.MealDaoImpl;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
 import ru.javawebinar.topjava.util.UserMealsUtil;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -24,11 +27,13 @@ public class MealServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOG.debug("redirect to mealList");
 
-        List<UserMeal> mealWithoutExceed = UserMealsUtil.getAllMeal();
-        List<UserMealWithExceed> mealsWithExceed = UserMealsUtil.getFilteredWithExceeded(mealWithoutExceed, LocalTime.MIN, LocalTime.MAX, 2000);
+
+        MealDao mealDao = new MealDaoImpl(UserMealsUtil.getAllMeal());
+        Map<Integer, UserMealWithExceed> mealsWithExceed = mealDao.getMealWithExceed(2000);
+//        List<UserMeal> mealWithoutExceed = UserMealsUtil.getAllMeal();
 //        request.getRequestDispatcher("/userList.jsp").forward(request, response);
         LOG.debug("size of mealsWithExceed " + mealsWithExceed.size());
-        request.setAttribute("mealList", mealsWithExceed);
+        request.setAttribute("mealMap", mealsWithExceed);
         try
         {
             getServletConfig().getServletContext().getRequestDispatcher("/mealList.jsp").forward(request, response);
