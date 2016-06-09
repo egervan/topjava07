@@ -1,7 +1,7 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
-import ru.javawebinar.topjava.dao.MealDao;
+import ru.javawebinar.topjava.dao.Dao;
 import ru.javawebinar.topjava.dao.MealDaoImpl;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
@@ -26,9 +26,9 @@ public class UpdateMealServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         LOG.debug("redirect to doPost updateMealServlet description = " );
 
-        MealDao mealDao = new MealDaoImpl();
+        Dao mealDao = new MealDaoImpl();
 
-        mealDao.updateMeal(new UserMeal(Integer.parseInt(request.getParameter("id")), LocalDateTime.parse(request.getParameter("datetime")), request.getParameter("description"), Integer.parseInt(request.getParameter("calories"))));
+        mealDao.update(new UserMeal(Integer.parseInt(request.getParameter("id")), LocalDateTime.parse(request.getParameter("datetime")), request.getParameter("description"), Integer.parseInt(request.getParameter("calories"))));
         Map<Integer, UserMealWithExceed> mealsWithExceed = mealDao.getMealWithExceed(2000);
         LOG.debug("size of mealsWithExceed " + mealsWithExceed.size());
         request.setAttribute("mealMap", mealsWithExceed);
@@ -40,9 +40,9 @@ public class UpdateMealServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         //LOG.debug("redirect to doGet updateMealServlet description = " + request.getParameter("meal"));
 
-        MealDao mealDao = new MealDaoImpl();
+        Dao mealDao = new MealDaoImpl();
 
-        UserMeal meal = mealDao.readMeal(Integer.parseInt(request.getParameter("id")));
+        UserMeal meal = mealDao.read(Integer.parseInt(request.getParameter("id")));
 
         request.setAttribute("meal", meal);
         try

@@ -1,10 +1,9 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
-import ru.javawebinar.topjava.dao.MealDao;
+import ru.javawebinar.topjava.dao.Dao;
 import ru.javawebinar.topjava.dao.MealDaoImpl;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
-import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +24,7 @@ public class DeleteMealServlet extends HttpServlet {
         LOG.debug("redirect to deleteMealServlet id = " + request.getParameter("id"));
 
 
-        MealDao mealDao = new MealDaoImpl();
+        Dao mealDao = new MealDaoImpl();
         mealDao.delete(Integer.parseInt(request.getParameter("id")));
         Map<Integer, UserMealWithExceed> mealsWithExceed = mealDao.getMealWithExceed(2000);
         LOG.debug("size of mealsWithExceed " + mealsWithExceed.size());

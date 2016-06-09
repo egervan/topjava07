@@ -2,18 +2,16 @@ package ru.javawebinar.topjava.dao;
 
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
-import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * Created by Jager on 08.06.2016.
  */
-public class MealDaoImpl implements MealDao {
+public class MealDaoImpl implements Dao {
 
     private static volatile Map<Integer, UserMeal> mapMeal;
 
@@ -35,17 +33,17 @@ public class MealDaoImpl implements MealDao {
     }*/
 
     @Override
-    public synchronized void createMeal(UserMeal userMeal) {
+    public synchronized void create(UserMeal userMeal) {
         mapMeal.put(userMeal.getId(), userMeal);
     }
 
     @Override
-    public synchronized UserMeal readMeal(int id) {
+    public synchronized UserMeal read(int id) {
         return mapMeal.get(id);
     }
 
     @Override
-    public synchronized void updateMeal(UserMeal userMeal) {
+    public synchronized void update(UserMeal userMeal) {
         mapMeal.put(userMeal.getId(), userMeal);
     }
 
@@ -55,12 +53,12 @@ public class MealDaoImpl implements MealDao {
     }
 
     @Override
-    public Map<Integer, UserMeal> getAllMeals() {
+    public Map getAllMeals() {
         return mapMeal;
     }
 
     @Override
-    public Map<Integer, UserMealWithExceed> getMealWithExceed(int caloriesPerDay) {
+    public Map getMealWithExceed(int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = mapMeal.entrySet().stream()
                 .map(Map.Entry::getValue)
                 .collect(
