@@ -29,16 +29,17 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     @Override
     public boolean delete(int id) {
         LOG.info("delete " + id);
-
+        return repository.remove(id) != null;
+/*
         if(!repository.containsKey(id)) return false;
 
         repository.remove(id);
-        return true;
+        return true;*/
     }
 
     @Override
     public User save(User user) {
-        LOG.info("save " + user);
+        LOG.info("create " + user);
 
         if(user.isNew()) user.setId(counter.incrementAndGet());
 
