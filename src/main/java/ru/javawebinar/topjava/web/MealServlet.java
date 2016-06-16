@@ -41,7 +41,7 @@ public class MealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
-        UserMeal userMeal = mealController.create(new UserMeal(id == null ? null : Integer.parseInt(id),
+        UserMeal userMeal = mealController.create(new UserMeal(id.isEmpty() ? null : Integer.parseInt(id),
                 LocalDateTime.parse(request.getParameter("dateTime")),
                 request.getParameter("description"),
                 Integer.parseInt(request.getParameter("calories")),
@@ -73,8 +73,8 @@ public class MealServlet extends HttpServlet {
       //              new UserMeal(LocalDateTime.now().withNano(0).withSecond(0), "", 1000) :
       //              repository.get(getId(request));
       //      request.setAttribute("meal", meal);
-            UserMeal meal = action.equals("create") ?
-                            null : mealController.get(getId(request));
+            final UserMeal meal = action.equals("create") ?
+                    new UserMeal(LocalDateTime.now().withNano(0).withSecond(0), "", 1000, LoggedUser.id()) : mealController.get(getId(request));
             request.setAttribute("meal", meal);
             request.getRequestDispatcher("mealEdit.jsp").forward(request, response);
         }

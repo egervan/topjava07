@@ -32,7 +32,6 @@ public class UserMealServiceImpl implements UserMealService {
     @Override
     public void delete(int userId, int id) throws NotFoundException{
         ExceptionUtil.checkNotFoundWithId(repository.delete(userId, id), id);
-
     }
 
     @Override
