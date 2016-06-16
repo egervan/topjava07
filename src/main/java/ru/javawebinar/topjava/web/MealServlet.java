@@ -17,7 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -58,11 +60,25 @@ public class MealServlet extends HttpServlet {
 
         if (action == null) {
             LOG.info("getAll");
-//            request.setAttribute("mealList",
-//                    UserMealsUtil.getWithExceeded(repository.getAll(LoggedUser.id()), UserMealsUtil.DEFAULT_CALORIES_PER_DAY));
             request.setAttribute("mealList", mealController.getAll());
             request.getRequestDispatcher("/mealList.jsp").forward(request, response);
-        } else if (action.equals("delete")) {
+        }
+        else if(action.equals("filter"))
+        {
+            String startTimeParam = request.getParameter("startTime");
+            String endTimeParam = request.getParameter("endTime");
+            String startDateParam = request.getParameter("startDate");
+            String endDateParam = request.getParameter("endDate");
+
+            LocalTime startTime = startTimeParam.isEmpty() ? null : LocalTime.parse(startTimeParam);
+            LocalTime endTime = endTimeParam.isEmpty() ? null : LocalTime.parse(endTimeParam);
+            LocalDate startDate = startDateParam.isEmpty() ? null : LocalDate.parse(startDateParam);
+            LocalDate endDate = endDateParam.isEmpty() ? null : LocalDate.parse(endDateParam);
+
+            request.setAttribute("mealList", mealController.getBetweenDateTime(startDate, endDate, startTime, endTime));
+            request.getRequestDispatcher("mealList.jsp").forward(request, response);
+        }
+        else if (action.equals("delete")) {
             int id = getId(request);
             LOG.info("Delete {}", id);
       //      repository.delete(id);
