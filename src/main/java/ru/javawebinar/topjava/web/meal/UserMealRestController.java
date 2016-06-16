@@ -53,9 +53,9 @@ public class UserMealRestController {
         return service.create(userMeal);
     }
 
-    public UserMealWithExceed get(int id) {
+    public UserMeal get(int id) {
         LOG.info("get meal " + id);
-        return service.get(LoggedUser.id(), id, LoggedUser.getCaloriesPerDay());
+        return service.get(LoggedUser.id(), id);
     }
 
     public void delete(int id) {

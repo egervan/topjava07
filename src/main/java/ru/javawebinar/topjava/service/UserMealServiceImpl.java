@@ -32,20 +32,19 @@ public class UserMealServiceImpl implements UserMealService {
     @Override
     public void delete(int userId, int id) throws NotFoundException{
         ExceptionUtil.checkNotFoundWithId(repository.delete(userId, id), id);
-        /*if(LoggedUser.id() != userId) throw new NotFoundException("This food doesn't belong to this user");
-        boolean result = repository.delete(userId, id);
-        if(!result) throw new NotFoundException("This food is not exist!");
-        return result;*/
+
     }
 
     @Override
-    public UserMealWithExceed get(int userId, int id, int caloriesPerDay) throws NotFoundException{
-        return  ExceptionUtil.checkNotFoundWithId(getBetweenDateTime(userId, caloriesPerDay, LocalDateTime.MIN, LocalDateTime.MAX).get(id), id);
+    public UserMeal get(int userId, int id) throws NotFoundException{
+        return  repository.get(userId, id);
+        //      return  ExceptionUtil.checkNotFoundWithId(getBetweenDateTime(userId, caloriesPerDay, LocalDateTime.MIN, LocalDateTime.MAX).get(id), id);
     }
 
   /*  @Override
-    public List<UserMealWithExceed> getAllWithExceed(int userId, int caloriesPerDay) {
-        return UserMealsUtil.getWithExceeded(repository.getAll(userId), caloriesPerDay);
+    public UserMealWithExceed get(int userId, int id, int caloriesPerDay) throws NotFoundException{
+        return  repository.get(userId, id);
+  //      return  ExceptionUtil.checkNotFoundWithId(getBetweenDateTime(userId, caloriesPerDay, LocalDateTime.MIN, LocalDateTime.MAX).get(id), id);
     }*/
 
     @Override

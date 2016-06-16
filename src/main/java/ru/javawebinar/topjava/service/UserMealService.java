@@ -14,6 +14,7 @@ public interface UserMealService {
     UserMeal create(UserMeal userMeal);
     void update(UserMeal userMeal);
     void delete(int userId, int id);
-    UserMealWithExceed get(int userId, int id, int caloriesPerDay);
+    UserMeal get(int userId, int id);
+//    UserMealWithExceed get(int userId, int id, int caloriesPerDay);
     List<UserMealWithExceed> getBetweenDateTime(int userId, int caloriesPerDay, LocalDateTime start, LocalDateTime end);
 }
