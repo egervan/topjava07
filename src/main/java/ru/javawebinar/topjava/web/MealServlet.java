@@ -28,9 +28,9 @@ import java.util.Objects;
  */
 public class MealServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
-    private static ConfigurableApplicationContext appCtx;
+    private ConfigurableApplicationContext appCtx;
   //  private UserMealRepository repository;
-    private static UserMealRestController mealController;
+    private UserMealRestController mealController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
