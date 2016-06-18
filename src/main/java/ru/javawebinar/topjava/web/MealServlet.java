@@ -58,16 +58,8 @@ public class MealServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
 
-
         if (action == null) {
             LOG.info("getAll");
-            request.setAttribute("mealList", mealController.getAll());
-            request.getRequestDispatcher("/mealList.jsp").forward(request, response);
-        }
-        else if (action.equals("auth")) {
-            LOG.info("getAll");
-            System.out.println(request.getParameter("user"));
-            LoggedUser.setId(Integer.parseInt(request.getParameter("user")));
             request.setAttribute("mealList", mealController.getAll());
             request.getRequestDispatcher("/mealList.jsp").forward(request, response);
         }
