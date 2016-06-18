@@ -52,6 +52,11 @@ public class UserMealServiceImpl implements UserMealService {
     }
 
     @Override
+    public List<UserMealWithExceed> getAll(int userId, int caloriesPerDay) {
+        return getBetweenDateTime(userId, caloriesPerDay, LocalDateTime.MIN, LocalDateTime.MAX);
+    }
+
+    @Override
     public void update(UserMeal userMeal) {
         repository.save(userMeal);
     }

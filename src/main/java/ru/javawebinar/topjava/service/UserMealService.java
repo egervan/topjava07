@@ -17,4 +17,6 @@ public interface UserMealService {
     UserMeal get(int userId, int id);
 //    UserMealWithExceed get(int userId, int id, int caloriesPerDay);
     List<UserMealWithExceed> getBetweenDateTime(int userId, int caloriesPerDay, LocalDateTime start, LocalDateTime end);
+    List<UserMealWithExceed> getAll(int userId, int caloriesPerDay);
+
 }

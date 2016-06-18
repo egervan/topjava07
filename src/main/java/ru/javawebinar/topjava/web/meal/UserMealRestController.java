@@ -27,7 +27,8 @@ public class UserMealRestController {
 
     public List<UserMealWithExceed> getAll() {
         LOG.info("getAll UserMealWithExceed");
-        return getBetweenDateTime(LocalDateTime.MIN, LocalDateTime.MAX);
+        return service.getAll(LoggedUser.id(), LoggedUser.getCaloriesPerDay());
+//        return getBetweenDateTime(LocalDateTime.MIN, LocalDateTime.MAX);
     }
 
     public List<UserMealWithExceed> getBetweenDateTime(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime)
