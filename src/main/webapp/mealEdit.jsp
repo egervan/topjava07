@@ -25,7 +25,8 @@
 </head>
 <body>
 <section>
-    <h2><a href="">Home</a></h2>
+    <h2><a href="index.html">Home</a></h2>
+    <h3>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h3>
     <h3><c:out value="${param.action == 'create' ? 'Create page' : 'Edit page'}"/></h3>
     <hr>
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.UserMeal" scope="request"/>

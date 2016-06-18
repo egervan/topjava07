@@ -74,7 +74,7 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
         List<UserMeal> meals = repository.get(userId).values()
                 .stream()
                 .filter(userMeal -> TimeUtil.isBetween(userMeal.getDateTime(), start, end))
-                .sorted((meal1, meal2) -> meal1.getDateTime().compareTo(meal2.getDateTime()))
+                .sorted((meal1, meal2) -> meal2.getDateTime().compareTo(meal1.getDateTime()))
                 .collect(Collectors.toList());
         //        meals.sort((meal1, meal2) -> meal1.getDateTime().compareTo(meal2.getDateTime()));
         if(meals.isEmpty()) meals = Collections.emptyList();
