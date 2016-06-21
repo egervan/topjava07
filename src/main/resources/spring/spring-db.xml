@@ -6,7 +6,8 @@
 
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
-    <bean class="ru.javawebinar.topjava.util.DbPopulator">
+    <bean id="dbPopulator" class="ru.javawebinar.topjava.util.DbPopulator">
+     <!--   <property name="dataSource" ref="dataSource"/>-->
         <constructor-arg name="scriptLocation" value="classpath:db/populateDB.sql"/>
     </bean>
 
