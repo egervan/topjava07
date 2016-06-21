@@ -48,6 +48,7 @@ public class UserMealsUtil {
                 .filter(um -> TimeUtil.isBetween(um.getDateTime().toLocalTime(), startTime, endTime))
                 .map(um -> createWithExceed(um, caloriesSumByDate.get(um.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
+        //Добавил локальную переменную и если она пустая, то возвращаю пустой лист, чтобы при итеррировании не было ошибок
         return result == null ? Collections.emptyList() : result;
     }
 
