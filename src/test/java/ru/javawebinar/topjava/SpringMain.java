@@ -33,6 +33,7 @@ public class SpringMain {
             System.out.println(adminUserController.create(UserTestData.USER));
             System.out.println();
 
+
             UserMealRestController mealController = appCtx.getBean(UserMealRestController.class);
             List<UserMealWithExceed> filteredMealsWithExceeded =
                     mealController.getBetween(
