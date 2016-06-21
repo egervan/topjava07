@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import static ru.javawebinar.topjava.UserTestData.USER;
  * GKislin
  * 13.03.2015.
  */
-@ContextConfiguration("classpath:spring/spring-app.xml")
+@ContextConfiguration("classpath:spring-test.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InMemoryAdminRestControllerSpringTest {
 
