@@ -44,10 +44,11 @@ public class UserMealsUtil {
                                 Collectors.summingInt(UserMeal::getCalories))
                 );
 
-        return mealList.stream()
+        List<UserMealWithExceed> result =  mealList.stream()
                 .filter(um -> TimeUtil.isBetween(um.getDateTime().toLocalTime(), startTime, endTime))
                 .map(um -> createWithExceed(um, caloriesSumByDate.get(um.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
+        return result == null ? Collections.emptyList() : result;
     }
 
     public static List<UserMealWithExceed> getFilteredWithExceededByCycle(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
