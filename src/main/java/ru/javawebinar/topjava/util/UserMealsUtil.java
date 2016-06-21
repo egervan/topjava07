@@ -51,7 +51,9 @@ public class UserMealsUtil {
                 .map(um -> createWithExceed(um, caloriesSumByDate.get(um.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
         //Добавил локальную переменную и если она пустая, то возвращаю пустой лист, чтобы при итеррировании не было ошибок
-        return result == null ? Collections.emptyList() : result;
+        return result;
+
+        //return result == null ? Collections.emptyList() : result;
     }
 
     public static List<UserMealWithExceed> getFilteredWithExceededByCycle(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
