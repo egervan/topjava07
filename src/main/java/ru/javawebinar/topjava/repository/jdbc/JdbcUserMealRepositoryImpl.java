@@ -55,7 +55,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
         } else {
             namedParameterJdbcTemplate.update(
                     "UPDATE meals SET description=:description, datetime=:datetime, calories=:calories, " +
-                            "user_id=:user_id WHERE id=:id", map);
+                            "user_id=:user_id WHERE user_id=:user_id AND id=:id", map);
         }
         return userMeal;
     }

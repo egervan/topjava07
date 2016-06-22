@@ -18,6 +18,7 @@ import java.time.Month;
 import static org.junit.Assert.*;
 import static ru.javawebinar.topjava.MealTestData.ID_MEAL_1;
 import static ru.javawebinar.topjava.MealTestData.ID_MEAL_NEW;
+import static ru.javawebinar.topjava.MealTestData.MATCHER;
 
 /**
  * Created by jager on 22.06.16.
@@ -50,7 +51,7 @@ public class UserMealServiceTest {
 
     @Test(expected = NotFoundException.class)
     public void testGetNotFoundUser() throws Exception {
-        service.get(1, 100009);
+        service.get(1, 100003);
     }
 
     @Test
@@ -78,8 +79,27 @@ public class UserMealServiceTest {
         UserMeal testMeal = MealTestData.MEAL_3;
         testMeal.setCalories(666);
         testMeal.setDescription("Smells food");
-        service.update(testMeal, 100000);
-   //     service.update(new UserMeal(ID_MEAL_1, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500), 100000);
+
+        int userId = 100000;
+        service.update(testMeal, userId);
+
+        UserMeal updatedMeal = service.get(testMeal.getId(), userId);
+
+        MATCHER.assertEquals(testMeal, updatedMeal);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void updateForeignMeal() throws Exception {
+        UserMeal testMeal = MealTestData.MEAL_4;
+        testMeal.setCalories(777);
+        testMeal.setDescription("Foreign food");
+
+        int userId = 100001;
+        service.update(testMeal, userId);
+
+        UserMeal updatedMeal = service.get(testMeal.getId(), userId);
+
+        MATCHER.assertEquals(testMeal, updatedMeal);
     }
 
     @Test
