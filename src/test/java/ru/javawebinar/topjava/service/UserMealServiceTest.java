@@ -14,11 +14,10 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
-import static ru.javawebinar.topjava.MealTestData.ID_MEAL_1;
-import static ru.javawebinar.topjava.MealTestData.ID_MEAL_NEW;
-import static ru.javawebinar.topjava.MealTestData.MATCHER;
+import static ru.javawebinar.topjava.MealTestData.*;
 
 /**
  * Created by jager on 22.06.16.
@@ -71,7 +70,7 @@ public class UserMealServiceTest {
 
     @Test
     public void getAll() throws Exception {
-        service.getAll(100000);
+        MATCHER.assertCollectionEquals(Arrays.asList(MEAL_6, MEAL_5, MEAL_4, MEAL_3, MEAL_2, MEAL_1), service.getAll(100000));
     }
 
     @Test
