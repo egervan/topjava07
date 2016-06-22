@@ -5,6 +5,8 @@ import ru.javawebinar.topjava.model.UserMeal;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Arrays;
+import java.util.List;
 
 import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
 
@@ -31,5 +33,8 @@ public class MealTestData {
     public static final UserMeal MEAL_5 = new UserMeal(ID_MEAL_5, LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500);
     public static final UserMeal MEAL_6 = new UserMeal(ID_MEAL_6, LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510);
 
-
+    public static List<UserMeal> getAll()
+    {
+        return Arrays.asList(MEAL_6, MEAL_5, MEAL_4, MEAL_3, MEAL_2, MEAL_1);
+    }
 }

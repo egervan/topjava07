@@ -9,12 +9,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.util.DbPopulator;
+import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 import static ru.javawebinar.topjava.MealTestData.*;
@@ -60,7 +64,13 @@ public class UserMealServiceTest {
 
     @Test
     public void getBetweenDates() throws Exception {
-        service.getBetweenDates(LocalDate.of(2015, Month.MAY, 30), LocalDate.of(2015, Month.MAY, 31), 100000);
+        LocalDate start = LocalDate.of(2015, Month.MAY, 30);
+        LocalDate end = LocalDate.of(2015, Month.MAY, 31);
+        Collection<UserMeal> expectedList = MealTestData.getAll().stream()
+                                                .filter(meal -> TimeUtil.isBetween(meal.getDateTime().toLocalDate(), start, end))
+                                                .collect(Collectors.toList());
+        Collection<UserMeal> resultList = service.getBetweenDates(start, end, 100000);
+        MATCHER.assertCollectionEquals(expectedList, resultList);
     }
 
     @Test
@@ -70,7 +80,7 @@ public class UserMealServiceTest {
 
     @Test
     public void getAll() throws Exception {
-        MATCHER.assertCollectionEquals(Arrays.asList(MEAL_6, MEAL_5, MEAL_4, MEAL_3, MEAL_2, MEAL_1), service.getAll(100000));
+        MATCHER.assertCollectionEquals(MealTestData.getAll(), service.getAll(100000));
     }
 
     @Test
