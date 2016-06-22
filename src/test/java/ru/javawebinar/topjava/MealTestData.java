@@ -20,6 +20,7 @@ public class MealTestData {
     public static final int ID_MEAL_4 = START_SEQ + 5;
     public static final int ID_MEAL_5 = START_SEQ + 6;
     public static final int ID_MEAL_6 = START_SEQ + 7;
+    public static final int ID_MEAL_NEW = START_SEQ + 8;
 
     public static final ModelMatcher<UserMeal, String> MATCHER = new ModelMatcher<>(UserMeal::toString);
 

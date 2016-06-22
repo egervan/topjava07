@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -46,7 +47,8 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
                 .addValue("datetime", userMeal.getDateTime())
                 .addValue("description", userMeal.getDescription())
                 .addValue("calories", userMeal.getCalories())
-                .addValue("user_id", userId);
+                .addValue("user_id", userId)
+                .addValue("id", userMeal.getId());
         if(userMeal.isNew()) {
             Number numberKey = insertUserMeal.executeAndReturnKey(map);
             userMeal.setId(numberKey.intValue());
@@ -65,7 +67,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public UserMeal get(int id, int userId) {
-        return jdbcTemplate.queryForObject("SELECT * FROM meals WHERE user_id=? AND id=?", ROW_MAPPER, userId, id);
+        return DataAccessUtils.singleResult(jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? AND id=?", ROW_MAPPER, userId, id));
 
     }
 
