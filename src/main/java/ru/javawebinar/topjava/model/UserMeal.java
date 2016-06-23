@@ -17,9 +17,10 @@ public class UserMeal extends BaseEntity {
     public UserMeal() {
         super();
     }
-  /*  public UserMeal(UserMeal userMeal) {
+
+    public UserMeal(UserMeal userMeal) {
         this(userMeal.getId(), userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories());
-    }*/
+    }
 
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);

@@ -3,6 +3,7 @@ package ru.javawebinar.topjava;
 import ru.javawebinar.topjava.matcher.ModelMatcher;
 import ru.javawebinar.topjava.model.UserMeal;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
@@ -16,6 +17,17 @@ import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
  */
 public class MealTestData {
 
+    public static final LocalDate START_DATE = LocalDate.of(2015, Month.MAY, 30);
+    public static final LocalDate END_DATE = LocalDate.of(2015, Month.MAY, 31);
+
+    public static final int LOGGED_USER_ID = 100000;
+    public static final int FOREIGN_USER_ID = 100001;
+    public static final int NOT_EXIST_USER_ID = 1;
+
+
+    public static final LocalDateTime startDateTime = LocalDateTime.of(2015, Month.MAY, 30, 10, 0);
+    public static final LocalDateTime   endDateTime = LocalDateTime.of(2015, Month.MAY, 31, 10, 0);
+
     public static final int ID_MEAL_1 = START_SEQ + 2;
     public static final int ID_MEAL_2 = START_SEQ + 3;
     public static final int ID_MEAL_3 = START_SEQ + 4;
@@ -23,6 +35,7 @@ public class MealTestData {
     public static final int ID_MEAL_5 = START_SEQ + 6;
     public static final int ID_MEAL_6 = START_SEQ + 7;
     public static final int ID_MEAL_NEW = START_SEQ + 8;
+    public static final int ID_MEAL_NOT_EXIST = 2;
 
     public static final ModelMatcher<UserMeal, String> MATCHER = new ModelMatcher<>(UserMeal::toString);
 
