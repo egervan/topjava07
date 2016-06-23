@@ -74,6 +74,11 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
+    public void deleteAll(int userId) {
+        repository.remove(userId);
+    }
+
+    @Override
     public Collection<UserMeal> getBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         Objects.requireNonNull(startDateTime);
         Objects.requireNonNull(endDateTime);

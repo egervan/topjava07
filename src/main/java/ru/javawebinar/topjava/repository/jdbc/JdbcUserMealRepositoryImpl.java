@@ -75,7 +75,6 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     @Override
     public UserMeal get(int id, int userId) {
         return DataAccessUtils.singleResult(jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? AND id=?", ROW_MAPPER, userId, id));
-
     }
 
     @Override
