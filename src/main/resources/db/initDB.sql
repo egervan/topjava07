@@ -35,3 +35,6 @@ CREATE TABLE meals
   datetime TIMESTAMP DEFAULT now(),
   FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+
+CREATE UNIQUE INDEX meals_unique_id_idx ON meals (id);
+
