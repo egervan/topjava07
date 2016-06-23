@@ -57,7 +57,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
             int x = namedParameterJdbcTemplate.update(
                     "UPDATE meals SET description=:description, datetime=:datetime, calories=:calories, " +
                             "user_id=:user_id WHERE user_id=:user_id AND id=:id", map);
-            if(x == 0) throw new NotFoundException("Еда не была обновлена, так как не принадлежит данному пользователю или не существует");
+            if(x == 0) return null;
         }
         return userMeal;
     }

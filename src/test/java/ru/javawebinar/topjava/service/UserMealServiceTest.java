@@ -37,8 +37,6 @@ public class UserMealServiceTest {
         dbPopulator.execute();
     }
 
-
-
     @Test
     public void testGet() throws Exception {
         UserMeal resultMeal = service.get(ID_MEAL_1, LOGGED_USER_ID);
