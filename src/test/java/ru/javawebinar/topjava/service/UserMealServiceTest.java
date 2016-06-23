@@ -56,8 +56,13 @@ public class UserMealServiceTest {
         service.get(ID_MEAL_NOT_EXIST, LOGGED_USER_ID);
     }
 
+    @Test(expected = NotFoundException.class)
+    public void testGetNotFoundMealOfForeignUser() throws Exception {
+        service.get(ID_MEAL_NOT_EXIST, FOREIGN_USER_ID);
+    }
+
     @Test
-    public void delete() throws Exception {
+    public void testDelete() throws Exception {
         service.delete(ID_MEAL_1, LOGGED_USER_ID);
     }
 
@@ -77,7 +82,7 @@ public class UserMealServiceTest {
     }
 
     @Test
-    public void getBetweenDates() throws Exception {
+    public void testGetBetweenDates() throws Exception {
         Collection<UserMeal> expectedList = MealTestData.getAll().stream()
                                                 .filter(meal -> TimeUtil.isBetween(meal.getDateTime().toLocalDate(), START_DATE, END_DATE))
                                                 .collect(Collectors.toList());
@@ -86,17 +91,17 @@ public class UserMealServiceTest {
     }
 
     @Test
-    public void getBetweenDateTimes() throws Exception {
+    public void testGetBetweenDateTimes() throws Exception {
         service.getBetweenDateTimes(startDateTime, endDateTime, LOGGED_USER_ID);
     }
 
     @Test
-    public void getAll() throws Exception {
+    public void testGetAll() throws Exception {
         MATCHER.assertCollectionEquals(MealTestData.getAll(), service.getAll(LOGGED_USER_ID));
     }
 
     @Test
-    public void update() throws Exception {
+    public void testUpdate() throws Exception {
         UserMeal testMeal = new UserMeal(MealTestData.MEAL_3);
         testMeal.setCalories(666);
         testMeal.setDescription("Smells food");
@@ -109,8 +114,8 @@ public class UserMealServiceTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void updateForeignMeal() throws Exception {
-        UserMeal testMeal = MealTestData.MEAL_4;
+    public void testUpdateForeignMeal() throws Exception {
+        UserMeal testMeal = new UserMeal(MealTestData.MEAL_4);
         testMeal.setCalories(777);
         testMeal.setDescription("Foreign food");
 
@@ -120,8 +125,20 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(testMeal, updatedMeal);
     }
 
+    @Test(expected = NotFoundException.class)
+    public void testUpdateNotFoundMeal() throws Exception {
+        UserMeal testMeal = new UserMeal(MealTestData.MEAL_4);
+        testMeal.setId(ID_MEAL_NOT_EXIST);
+        testMeal.setCalories(777);
+        testMeal.setDescription("Not exist meal");
+
+        service.update(testMeal, FOREIGN_USER_ID);
+/*
+        UserMeal updatedMeal = service.get(testMeal.getId(), FOREIGN_USER_ID);
+        MATCHER.assertEquals(testMeal, updatedMeal);*/
+    }
     @Test
-    public void create() throws Exception {
+    public void testCreate() throws Exception {
         service.save(new UserMeal(LocalDateTime.of(2016, Month.JUNE, 22, 13, 33), "JustFood", 666), LOGGED_USER_ID);
     }
 
