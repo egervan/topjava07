@@ -68,6 +68,11 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
+    public void deleteAll(int userId) {
+        jdbcTemplate.update("DELETE from meals WHERE user_id=?", userId);
+    }
+
+    @Override
     public UserMeal get(int id, int userId) {
         return DataAccessUtils.singleResult(jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? AND id=?", ROW_MAPPER, userId, id));
 
