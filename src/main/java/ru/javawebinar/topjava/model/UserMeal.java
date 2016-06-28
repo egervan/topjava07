@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 
 })
 @Entity
-@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = "date_time", name = "meals_unique_user_datetime_idx")})
+@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = "date_time", name = "meals_unique_user_datetime_idx"), @UniqueConstraint(columnNames = "user_id", name = "meals_unique_user_datetime_idx")})
 public class UserMeal extends BaseEntity {
 
     public static final String DELETE = "UserMeal.delete";
@@ -40,7 +40,7 @@ public class UserMeal extends BaseEntity {
     @Column(name = "calories")
     protected int calories;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     public UserMeal() {

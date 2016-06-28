@@ -32,13 +32,16 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
             em.persist(userMeal);
             return userMeal;
         } else {
-            if(userMeal.getId() != userId) {
+            if(userMeal.getUser() == null)
+            {
+                userMeal.setUser(em.getReference(User.class, userId));
+            }
+            else if(userMeal.getUser().getId() != userId)
+            {
                 return null;
             }
-            else
-            {
                 return em.merge(userMeal);
-            }
+
         }
     }
 
