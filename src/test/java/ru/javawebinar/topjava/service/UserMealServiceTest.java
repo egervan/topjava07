@@ -61,8 +61,10 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(ADMIN_MEAL, actual);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testGetNotFound() throws Exception {
+        exception.expect(NotFoundException.class);
+        exception.expectMessage("Not found entity with id="+MEAL1_ID);
         service.get(MEAL1_ID, ADMIN_ID);
     }
 
@@ -73,8 +75,10 @@ public class UserMealServiceTest {
         MATCHER.assertEquals(updated, service.get(MEAL1_ID, USER_ID));
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testNotFoundUpdate() throws Exception {
+        exception.expect(NotFoundException.class);
+        exception.expectMessage("Not found entity with id="+MEAL1_ID);
         UserMeal item = service.get(MEAL1_ID, USER_ID);
         service.update(item, ADMIN_ID);
     }
