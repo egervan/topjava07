@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
  */
 @NamedQueries({
         @NamedQuery(name = UserMeal.ALL_SORTED, query = "SELECT m FROM UserMeal m WHERE m.user.id=:userId ORDER BY m.id DESC"),
-/*        @NamedQuery(name = UserMeal.DELETE, query = "DELETE FROM UserMeal m WHERE m.user_id=:user_id"),
+        @NamedQuery(name = UserMeal.DELETE, query = "DELETE FROM UserMeal m WHERE m.user.id=:userId AND m.id=:id"),
+/*
         @NamedQuery(name = UserMeal.BY_ID, query = "SELECT m FROM UserMeal m WHERE m.user_id=:user_id AND m.id=:id"),
 */
 

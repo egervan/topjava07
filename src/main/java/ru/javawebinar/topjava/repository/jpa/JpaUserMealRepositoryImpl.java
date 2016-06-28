@@ -42,8 +42,9 @@ public class JpaUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id, int userId) {
-        return false;
+        return em.createNamedQuery(UserMeal.DELETE).setParameter("userId", userId).setParameter("id", id).executeUpdate() != 0;
     }
 
     @Override
