@@ -1,20 +1,41 @@
 package ru.javawebinar.topjava.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
  * GKislin
  * 11.01.2015.
  */
+@NamedQueries({
+        @NamedQuery(name = UserMeal.ALL_SORTED, query = "SELECT m FROM UserMeal m WHERE m.user.id=:userId ORDER BY m.id DESC"),
+/*        @NamedQuery(name = UserMeal.DELETE, query = "DELETE FROM UserMeal m WHERE m.user_id=:user_id"),
+        @NamedQuery(name = UserMeal.BY_ID, query = "SELECT m FROM UserMeal m WHERE m.user_id=:user_id AND m.id=:id"),
+*/
 
+})
+@Entity
+@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = "date_time", name = "meals_unique_user_datetime_idx")})
 public class UserMeal extends BaseEntity {
 
+    public static final String DELETE = "UserMeal.delete";
+    public static final String ALL_SORTED = "UserMeal.getAllSorted";
+    public static final String BY_ID = "UserMeal.getById";
+
+    @Column(name = "date_time", nullable = false)
+    @NotNull
     private LocalDateTime dateTime;
 
+    @Column(name= "description", nullable = false)
+    @NotEmpty
     private String description;
 
+    @Column(name = "calories")
     protected int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
