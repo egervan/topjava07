@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -114,6 +115,7 @@ public class UserMealServiceTest {
     }
 
     @Test
+    @Transactional
     public void testNotFoundUpdate() throws Exception {
         exception.expect(NotFoundException.class);
         exception.expectMessage("Not found entity with id="+MEAL1_ID);
