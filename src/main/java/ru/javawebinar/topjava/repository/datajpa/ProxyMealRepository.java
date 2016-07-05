@@ -34,6 +34,9 @@ public interface ProxyMealRepository extends JpaRepository<UserMeal, Integer> {
     @Query("SELECT FROM UserMeal m WHERE m.user.id=:userId")
     List<UserMeal> findAll(@Param("userId") int userId);
 */
+    UserMeal findOneByIdAndUserId(Integer id, Integer userId);
 
-    List<UserMeal> findAllByUserIdAndDateTimeBetweenOrderByDateTimeDesc(LocalDateTime startDate, LocalDateTime endDate, int userId);
+    List<UserMeal> findAllByUserIdOrderByIdDesc(int userId);
+
+    List<UserMeal> findAllByDateTimeBetweenAndUserIdOrderByDateTimeDesc(LocalDateTime startDate, LocalDateTime endDate, int userId);
 }

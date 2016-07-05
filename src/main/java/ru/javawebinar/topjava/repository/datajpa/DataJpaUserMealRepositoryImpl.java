@@ -24,7 +24,9 @@ public class DataJpaUserMealRepositoryImpl implements UserMealRepository{
 
     @Override
     public UserMeal save(UserMeal userMeal, int userId) {
-        userMeal.setUser(userProxy.findOne(userId));
+        if(userMeal.getUser() == null) userMeal.setUser(userProxy.findOne(userId));
+        else if(!userMeal.getUser().equals(userProxy.getOne(userId))) return null;
+
         return proxy.save(userMeal);
     }
 
@@ -35,16 +37,16 @@ public class DataJpaUserMealRepositoryImpl implements UserMealRepository{
 
     @Override
     public UserMeal get(int id, int userId) {
-        return proxy.findOne(id);
+        return proxy.findOneByIdAndUserId(id, userId);
     }
 
     @Override
     public List<UserMeal> getAll(int userId) {
-        return proxy.findAll();
+        return proxy.findAllByUserIdOrderByIdDesc(userId);
     }
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return proxy.findAllByUserIdAndDateTimeBetweenOrderByDateTimeDesc(startDate, endDate, userId);
+        return proxy.findAllByDateTimeBetweenAndUserIdOrderByDateTimeDesc(startDate, endDate, userId);
     }
 }

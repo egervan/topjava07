@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.Profiles;
 import ru.javawebinar.topjava.model.UserMeal;
@@ -97,6 +98,7 @@ public class UserMealServiceTest {
     }
 
     @Test
+    @Transactional
     public void testNotFoundUpdate() throws Exception {
         UserMeal item = service.get(MEAL1_ID, USER_ID);
         thrown.expect(NotFoundException.class);
