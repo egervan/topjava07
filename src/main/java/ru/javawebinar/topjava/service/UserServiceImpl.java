@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @CacheEvict(value = "users", allEntries = true)
+
     @Override
     public void evictCache() {
     }
