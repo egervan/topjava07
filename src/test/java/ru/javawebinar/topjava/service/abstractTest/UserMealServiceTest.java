@@ -60,7 +60,7 @@ public abstract class UserMealServiceTest extends ServiceTest {
     }
 
     @Test
-    @Transactional
+ //   @Transactional
     public void testNotFoundUpdate() throws Exception {
         UserMeal item = service.get(MEAL1_ID, USER_ID);
         thrown.expect(NotFoundException.class);
