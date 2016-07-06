@@ -35,7 +35,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(Profiles.ACTIVE_DB)
+@ActiveProfiles(profiles = {Profiles.ACTIVE_DB, Profiles.JPA})
 public class UserMealServiceTest {
     private static final Logger LOG = LoggerFactory.getLogger(UserMealServiceTest.class);;
 
@@ -98,7 +98,7 @@ public class UserMealServiceTest {
     }
 
     @Test
-  //  @Transactional
+    @Transactional
     public void testNotFoundUpdate() throws Exception {
         UserMeal item = service.get(MEAL1_ID, USER_ID);
         thrown.expect(NotFoundException.class);

@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.util;
 
 import org.springframework.util.StringUtils;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -34,5 +35,15 @@ public class TimeUtil {
 
     public static LocalTime parseLocalTime(String str) {
         return StringUtils.isEmpty(str) ? null : LocalTime.parse(str);
+    }
+
+    public static LocalDateTime toLocalDateTimeConverter(Timestamp time)
+    {
+        return time.toLocalDateTime();
+    }
+
+    public static Timestamp toTimestampConverter(LocalDateTime time)
+    {
+        return Timestamp.valueOf(time);
     }
 }

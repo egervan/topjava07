@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
+import ru.javawebinar.topjava.util.TimeUtil;
 
 import javax.sql.DataSource;
 import java.time.LocalDateTime;
@@ -47,7 +48,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
                 .addValue("id", userMeal.getId())
                 .addValue("description", userMeal.getDescription())
                 .addValue("calories", userMeal.getCalories())
-                .addValue("date_time", userMeal.getDateTime())
+                .addValue("date_time", TimeUtil.toTimestampConverter(userMeal.getDateTime()))
                 .addValue("user_id", userId);
 
         if (userMeal.isNew()) {
