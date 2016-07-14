@@ -3,8 +3,7 @@ package ru.javawebinar.topjava.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.web.meal.UserMealRestController;
@@ -43,9 +42,29 @@ public class RootController {
         return "redirect:meals";
     }
 
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String delete(@ModelAttribute("id") Integer id, Model model) {
+        mealController.delete(id);
+        return "redirect:meals";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.GET)
+    public String update(@ModelAttribute("id") Integer id, Model model) {
+        model.addAttribute("meal", mealController.get(id));
+        return "mealEdit";
+    }
+
     @RequestMapping(value = "/meals", method = RequestMethod.GET)
-    public String meals(/*HttpServletRequest request, HttpServletResponse response*/ Model model) {
+    public String meals(HttpServletRequest request,/*, HttpServletResponse response*/ Model model) {
+        if("delete".equals(request.getParameter("action")))
+            return "forward:delete";
+        else if("delete".equals(request.getParameter("action")))
+            return "forward:update";
+
         model.addAttribute("mealList", mealController.getAll());
         return "mealList";
     }
+
+
+
 }
