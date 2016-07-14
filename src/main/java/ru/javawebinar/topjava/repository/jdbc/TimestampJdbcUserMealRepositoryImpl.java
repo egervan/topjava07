@@ -15,12 +15,12 @@ import java.time.LocalDateTime;
  * Date: 26.08.2014
  */
 
-@Repository
+@Repository()
 @Profile(Profiles.HSQLDB)
-public class JdbcHsqldbUserMealRepositoryImpl extends AbstractJdbcUserMealRepositoryImpl<Timestamp> {
+public class TimestampJdbcUserMealRepositoryImpl extends AbstractJdbcUserMealRepositoryImpl<Timestamp> {
 
     @Autowired
-    public JdbcHsqldbUserMealRepositoryImpl(DataSource dataSource) {
+    public TimestampJdbcUserMealRepositoryImpl(DataSource dataSource) {
         super((rs, rowNum) ->
                 new UserMeal(rs.getInt("id"), rs.getTimestamp("date_time").toLocalDateTime(),
                         rs.getString("description"), rs.getInt("calories")), dataSource

@@ -17,10 +17,10 @@ import java.time.LocalDateTime;
 
 @Repository
 @Profile(Profiles.POSTGRES)
-public class JdbcPostgresUserMealRepositoryImpl extends AbstractJdbcUserMealRepositoryImpl<LocalDateTime> {
+public class Java8JdbcUserMealRepositoryImpl extends AbstractJdbcUserMealRepositoryImpl<LocalDateTime> {
 
     @Autowired
-    public JdbcPostgresUserMealRepositoryImpl(DataSource dataSource) {
+    public Java8JdbcUserMealRepositoryImpl(DataSource dataSource) {
         super(BeanPropertyRowMapper.newInstance(UserMeal.class), dataSource);
     }
 

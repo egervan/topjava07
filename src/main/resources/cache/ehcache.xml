@@ -28,4 +28,19 @@
     <cache name="ru.javawebinar.topjava.model.User"
            maxElementsInMemory="25000"/>
 
+<!--
+    <cache name="ru.javawebinar.topjava.model.User.roles"
+           timeToLiveSeconds="60"
+           maxElementsInMemory="1000"
+           eternal="false"
+           overflowToDisk="false"
+           maxElementsOnDisk="10000000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="1"
+           memoryStoreEvictionPolicy="LRU"/>
+
+    <cache name="ru.javawebinar.topjava.model.Role"
+           maxElementsInMemory="25000"/>
+-->
+
 </ehcache>
