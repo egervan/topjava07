@@ -25,7 +25,7 @@ public class SpringMain {
 
             System.out.println(Arrays.toString(appCtx.getBeanDefinitionNames()));
             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
-       //     System.out.println(adminUserController.get(UserTestData.USER_ID));
+            System.out.println(adminUserController.get(UserTestData.USER_ID));
             System.out.println();
 
             UserMealRestController mealController = appCtx.getBean(UserMealRestController.class);
