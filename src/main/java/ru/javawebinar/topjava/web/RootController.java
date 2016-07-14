@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.AuthorizedUser;
+import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.web.meal.UserMealRestController;
 
@@ -12,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * User: gkislin
@@ -58,12 +61,33 @@ public class RootController {
     public String meals(HttpServletRequest request,/*, HttpServletResponse response*/ Model model) {
         if("delete".equals(request.getParameter("action")))
             return "forward:delete";
-        else if("delete".equals(request.getParameter("action")))
+        else if("update".equals(request.getParameter("action")))
             return "forward:update";
 
         model.addAttribute("mealList", mealController.getAll());
         return "mealList";
     }
+
+    @RequestMapping(value = "/meals", method = RequestMethod.POST)
+    public String updateAction(HttpServletRequest request,/*, HttpServletResponse response*/ Model model) {
+        final UserMeal userMeal = new UserMeal(
+                LocalDateTime.parse(request.getParameter("dateTime")),
+                request.getParameter("description"),
+                Integer.valueOf(request.getParameter("calories")));
+
+        mealController.update(userMeal, getId(request));
+        model.addAttribute("mealList", mealController.getAll());
+        return "mealList";
+    }
+
+    private int getId(HttpServletRequest request) {
+        String paramId = Objects.requireNonNull(request.getParameter("id"));
+        return Integer.valueOf(paramId);
+    }
+
+
+
+
 
 
 
