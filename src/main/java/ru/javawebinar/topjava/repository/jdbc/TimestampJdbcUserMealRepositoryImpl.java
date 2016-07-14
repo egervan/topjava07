@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * Date: 26.08.2014
  */
 
-@Repository()
+@Repository
 @Profile(Profiles.HSQLDB)
 public class TimestampJdbcUserMealRepositoryImpl extends AbstractJdbcUserMealRepositoryImpl<Timestamp> {
 

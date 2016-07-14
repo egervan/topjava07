@@ -17,6 +17,9 @@
 
     <context:component-scan base-package="ru.javawebinar.**.service"/>
 
-    <bean name="AdminRestController" class="ru.javawebinar.topjava.web.user.AdminRestController"/>
-    <bean name="UserMealRestController" class="ru.javawebinar.topjava.web.meal.UserMealRestController"/>
-</beans>
+    <context:component-scan base-package="ru.javawebinar.**.web.meal"/>
+    <context:component-scan base-package="ru.javawebinar.**.web.user"/>
+
+    <!--   <bean name="AdminRestController" class="ru.javawebinar.topjava.web.user.AdminRestController"/>
+       <bean name="UserMealRestController" class="ru.javawebinar.topjava.web.meal.UserMealRestController"/>
+   --></beans>

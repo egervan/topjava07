@@ -3,12 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
 <html>
-<head>
-    <title>Meal list</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<jsp:include page="fragments/headTag.jsp"/>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
+    <h3><fmt:message key="meals.title"/></h3>
     <h2><a href="index.jsp">Home</a></h2>
     <h3>Meal list</h3>
     <form method="post" action="meals?action=filter">
