@@ -45,8 +45,8 @@ public class RootController {
         return "redirect:meals";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@ModelAttribute("id") Integer id, Model model) {
+    @RequestMapping(value = "/delete&id={id}", method = RequestMethod.GET)
+    public String delete(@PathVariable("id") Integer id, Model model) {
         mealController.delete(id);
         return "redirect:meals";
     }

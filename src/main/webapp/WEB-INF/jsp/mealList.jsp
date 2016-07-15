@@ -59,7 +59,7 @@
                         <button type="submit">Delete</button>
                     </form>
                 </td>--%>
-                <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
+                <td><a href="delete&id=${meal.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
