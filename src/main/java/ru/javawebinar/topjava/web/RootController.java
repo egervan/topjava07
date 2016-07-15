@@ -57,12 +57,20 @@ public class RootController {
         return "mealEdit";
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String create(Model model) {
+        model.addAttribute("meal", new UserMeal());
+        return "mealEdit";
+    }
+
     @RequestMapping(value = "/meals", method = RequestMethod.GET)
     public String meals(HttpServletRequest request,/*, HttpServletResponse response*/ Model model) {
         if("delete".equals(request.getParameter("action")))
             return "forward:delete";
         else if("update".equals(request.getParameter("action")))
             return "forward:update";
+        else if("create".equals(request.getParameter("action")))
+            return "forward:create";
 
         model.addAttribute("mealList", mealController.getAll());
         return "mealList";
@@ -75,7 +83,9 @@ public class RootController {
                 request.getParameter("description"),
                 Integer.valueOf(request.getParameter("calories")));
 
-        mealController.update(userMeal, getId(request));
+        if(request.getParameter("id").isEmpty()) mealController.create(userMeal);
+        else mealController.update(userMeal, getId(request));
+
         model.addAttribute("mealList", mealController.getAll());
         return "mealList";
     }
