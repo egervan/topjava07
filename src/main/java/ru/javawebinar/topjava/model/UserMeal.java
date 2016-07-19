@@ -30,6 +30,7 @@ public class UserMeal extends BaseEntity {
     public static final String DELETE = "UserMeal.delete";
     public static final String GET_BETWEEN = "UserMeal.getBetween";
 
+
     @Column(name = "date_time", nullable = false)
     @NotNull
     private LocalDateTime dateTime;
