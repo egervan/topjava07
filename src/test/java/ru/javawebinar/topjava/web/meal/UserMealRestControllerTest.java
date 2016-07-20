@@ -6,6 +6,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
@@ -21,8 +23,8 @@ import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static ru.javawebinar.topjava.MealTestData.MEAL1;
-import static ru.javawebinar.topjava.MealTestData.MEAL1_ID;
+import static ru.javawebinar.topjava.MealTestData.*;
+
 /**
  * Created by jager on 20.07.16.
  */
@@ -84,7 +86,20 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void createMeal() throws Exception {
+        UserMeal meal = MealTestData.getCreated();
+        String jsonMeal = JsonUtil.writeValue(meal);
 
+/*
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.put(REST_URL + MEAL1_ID);
+        request.contentType(MediaType.APPLICATION_JSON);
+        request.content(jsonMeal);
+*/
+
+        mockMvc.perform(/*request*/MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonMeal))
+                .andDo(print())
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -97,21 +112,19 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void update() throws Exception {
-        UserMeal meal = MEAL1;
-        meal.setDescription("Updated description");
+        UserMeal meal = getUpdated();
         String jsonMeal = JsonUtil.writeValue(meal);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.put(REST_URL + MEAL1_ID);
+     /*   MockHttpServletRequestBuilder request = MockMvcRequestBuilders.put(REST_URL + meal.getId());
         request.contentType(MediaType.APPLICATION_JSON);
         request.content(jsonMeal);
-
-        mockMvc.perform(request)
+*/
+        mockMvc.perform(/*request*/MockMvcRequestBuilders.put(REST_URL + meal.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonMeal))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
-
-        get();
-
 
 
     }
