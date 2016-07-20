@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.web.meal;
 
 import org.junit.Test;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.http.MediaType;
 
 import org.springframework.test.web.servlet.MvcResult;
@@ -14,6 +15,8 @@ import ru.javawebinar.topjava.util.UserMealsUtil;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.is;
@@ -94,11 +97,14 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(MEAL1.getId())))
+                .andExpect(MATCHER.contentMatcher(MEAL1));
+            /*    .andExpect(jsonPath("$.id", is(MEAL1.getId())))
                 .andExpect(jsonPath("$.dateTime", is(MEAL1.getDateTime().format(DateTimeFormatter.ISO_DATE_TIME))))
                 .andExpect(jsonPath("$.description", is(MEAL1.getDescription())))
-                .andExpect(jsonPath("$.calories", is(MEAL1.getCalories()))
-                );
+                .andExpect(jsonPath("$.calories", is(MEAL1.getCalories()))*/
+                        //                .andExpect(MATCHER.contentMatcher(DataAccessUtils.singleResult(UserMealsUtil.getWithExceeded(Collections.singletonList(MEAL1), AuthorizedUser.getCaloriesPerDay()))
+
+
     }
 
     @Test
@@ -153,7 +159,7 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$", hasSize(3)))
-                ;
+                .andExpect(WITH_EXCEED_MATCHER.contentListMatcher(UserMealsUtil.getWithExceeded(Arrays.asList(MEAL6, MEAL5, MEAL4), AuthorizedUser.getCaloriesPerDay())));
     }
 
 }
