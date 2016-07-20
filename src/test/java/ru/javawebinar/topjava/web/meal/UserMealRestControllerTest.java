@@ -53,7 +53,8 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(6)))
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$.[0]", is(JsonUtil.writeValue(listMealWithExceed.get(0)).replaceAll("\"", ""))))
+           //     .andExpect(jsonPath("$.[0]", is(JsonUtil.writeValue(listMealWithExceed.get(0)))))
+                .andExpect(MATCHER.assertCollectionEquals(listMealWithExceed, JsonUtil.readValues(jsonPath("$"), UserMealWithExceed.class)))
                 .andReturn();
 
 
@@ -88,6 +89,8 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
                 .andExpect((jsonPath("$.[4].id").exists()))
                 .andExpect((jsonPath("$.[5].id").exists()))
                 ;
+                //                .andExpect((jsonPath("$.[0].description", is(listMealWithExceed.get(0).getDescription())))
+
 
                 */
     }
