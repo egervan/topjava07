@@ -28,7 +28,7 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     public static final String REST_URL = UserMealRestController.REST_URL + '/';
 
-//    public static final ModelMatcher<UserMealWithExceed, String> WITH_EXCEED_MATCHER = new ModelMatcher<>(mealWithExceed -> mealWithExceed.toString());
+    public static final ModelMatcher<UserMealWithExceed, String> WITH_EXCEED_MATCHER = new ModelMatcher<>(mealWithExceed -> mealWithExceed.toString(), UserMealWithExceed.class);
 
     /*new ModelMatcher(new Function<UserMealWithExceed, UserMeal>() {
         @Override
@@ -46,7 +46,8 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(6)))
-                .andExpect(jsonPath("$").isArray());
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(WITH_EXCEED_MATCHER.contentListMatcher(UserMealsUtil.getWithExceeded(MealTestData.USER_MEALS, AuthorizedUser.getCaloriesPerDay())));
            //     .andExpect(jsonPath("$.[0]", is(JsonUtil.writeValue(listMealWithExceed.get(0)))))
 
 
