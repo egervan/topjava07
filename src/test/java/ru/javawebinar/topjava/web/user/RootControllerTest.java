@@ -10,7 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ru.javawebinar.topjava.MealTestData.MEAL1;
 import static ru.javawebinar.topjava.MealTestData.MEAL1_ID;
 import static ru.javawebinar.topjava.UserTestData.USER;
-import static ru.javawebinar.topjava.UserTestData.USER_ID;
+import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
 
 /**
  * GKislin
@@ -28,14 +28,14 @@ public class RootControllerTest extends AbstractControllerTest {
                 .andExpect(model().attribute("userList", hasSize(2)))
                 .andExpect(model().attribute("userList", hasItem(
                         allOf(
-                                hasProperty("id", is(USER_ID)),
+                                hasProperty("id", is(START_SEQ)),
                                 hasProperty("name", is(USER.getName()))
                         )
                 )));
     }
 
     @Test
-    public void testMealList() throws Exception {
+    public void testMealList () throws Exception {
         mockMvc.perform(get("/meals"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -46,8 +46,8 @@ public class RootControllerTest extends AbstractControllerTest {
                         allOf(
                                 hasProperty("id", is(MEAL1_ID)),
                                 hasProperty("description", is(MEAL1.getDescription())),
-                                hasProperty("calories", is(MEAL1.getCalories())),
-                                hasProperty("dateTime", is(MEAL1.getDateTime()))
+                                hasProperty("dateTime", is(MEAL1.getDateTime())),
+                                hasProperty("calories", is(MEAL1.getCalories()))
                         )
                 )));
     }
