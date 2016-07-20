@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
+import ru.javawebinar.topjava.web.user.AdminRestController;
 
 import java.time.format.DateTimeFormatter;
 
@@ -14,16 +15,15 @@ import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static ru.javawebinar.topjava.MealTestData.MEAL1;
 import static ru.javawebinar.topjava.MealTestData.MEAL1_ID;
-import static ru.javawebinar.topjava.MealTestData.MEAL6;
-import static ru.javawebinar.topjava.web.meal.UserMealRestController.REST_URL;
-
 /**
  * Created by jager on 20.07.16.
  */
 public class UserMealRestControllerTest extends AbstractControllerTest {
+
+    public static final String REST_URL = UserMealRestController.REST_URL + '/';
+
     @Test
     public void getAll() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get(REST_URL))
@@ -65,7 +65,7 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void get() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "/" + MEAL1_ID))
+        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + MEAL1_ID))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -83,7 +83,10 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void delete() throws Exception {
-
+        mockMvc.perform(MockMvcRequestBuilders.delete(REST_URL + MEAL1_ID))
+                .andDo(print())
+                .andExpect(status().isOk())
+        ;
     }
 
     @Test
@@ -93,7 +96,12 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void getBetween() throws Exception {
-
+        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "between").param("start", "2015-05-31T00:00:00").param("end", "2015-05-31T23:59:59"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", hasSize(3)))
+                ;
     }
 
 }
