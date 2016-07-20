@@ -57,6 +57,8 @@ public class UserMealServiceImpl implements UserMealService {
 //        UserMeal meal = get(id, userId);
 //        meal.setUser(userRepository.get(userId));
 //        return meal;
-        return ExceptionUtil.checkNotFoundWithId(repository.getWithUser(id, userId), id);
+        //закомментировал строку ниже
+  //      return ExceptionUtil.checkNotFoundWithId(repository.getWithUser(id, userId), id);
+        return null;
     }
 }

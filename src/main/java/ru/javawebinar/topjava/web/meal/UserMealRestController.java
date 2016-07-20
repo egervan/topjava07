@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping(UserMealRestController.REST_URL)
 public class UserMealRestController extends AbstractUserMealController {
-    static final String REST_URL = "rest/meals";
+    static final String REST_URL = "/rest/meals";
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserMealWithExceed> getAll() {
@@ -33,7 +33,7 @@ public class UserMealRestController extends AbstractUserMealController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserMeal> createWithLocation(@RequestBody UserMeal meal) {
+    public ResponseEntity<UserMeal> createMeal(@RequestBody UserMeal meal) {
         UserMeal created = super.create(meal);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
