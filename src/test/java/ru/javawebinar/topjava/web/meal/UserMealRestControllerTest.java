@@ -2,11 +2,17 @@ package ru.javawebinar.topjava.web.meal;
 
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
+import ru.javawebinar.topjava.web.json.JsonUtil;
 import ru.javawebinar.topjava.web.user.AdminRestController;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.hasProperty;
@@ -91,6 +97,22 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void update() throws Exception {
+        UserMeal meal = MEAL1;
+        meal.setDescription("Updated description");
+        String jsonMeal = JsonUtil.writeValue(meal);
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.put(REST_URL + MEAL1_ID);
+        request.contentType(MediaType.APPLICATION_JSON);
+        request.content(jsonMeal);
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        get();
+
+
 
     }
 
