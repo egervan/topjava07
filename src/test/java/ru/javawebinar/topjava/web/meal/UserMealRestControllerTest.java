@@ -1,12 +1,10 @@
 package ru.javawebinar.topjava.web.meal;
 
-import com.jayway.jsonassert.impl.JsonAsserterImpl;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.matcher.ModelMatcher;
@@ -17,14 +15,11 @@ import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.function.Function;
-
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static ru.javawebinar.topjava.MealTestData.*;
-import com.jayway.jsonassert.*;
 
 /**
  * Created by jager on 20.07.16.
@@ -33,7 +28,7 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     public static final String REST_URL = UserMealRestController.REST_URL + '/';
 
-    private ModelMatcher<UserMealWithExceed, String> matcher = new ModelMatcher<>(mealWithExceed -> mealWithExceed.toString());
+//    public static final ModelMatcher<UserMealWithExceed, String> WITH_EXCEED_MATCHER = new ModelMatcher<>(mealWithExceed -> mealWithExceed.toString());
 
     /*new ModelMatcher(new Function<UserMealWithExceed, UserMeal>() {
         @Override
@@ -46,16 +41,13 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
         List<UserMealWithExceed> listMealWithExceed = UserMealsUtil.getWithExceeded(MealTestData.USER_MEALS, AuthorizedUser.getCaloriesPerDay());
         List<UserMealWithExceed> resultList;
 
-        MvcResult result;
-        result = mockMvc.perform(MockMvcRequestBuilders.get(REST_URL))
+         mockMvc.perform(MockMvcRequestBuilders.get(REST_URL))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(6)))
-                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$").isArray());
            //     .andExpect(jsonPath("$.[0]", is(JsonUtil.writeValue(listMealWithExceed.get(0)))))
-                .andExpect(MATCHER.assertCollectionEquals(listMealWithExceed, JsonUtil.readValues(jsonPath("$"), UserMealWithExceed.class)))
-                .andReturn();
 
 
 
