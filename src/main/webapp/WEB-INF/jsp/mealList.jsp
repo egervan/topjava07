@@ -30,7 +30,7 @@
     <hr>
     <a href="meals/create"><fmt:message key="meals.add"/></a>
     <hr>
-    <table border="1" cellpadding="8" cellspacing="0">
+    <table border="1" cellpadding="8" cellspacing="0" id="datatable">
         <thead>
         <tr>
             <th>Date</th>
@@ -78,13 +78,13 @@
             "bInfo": false,
             "aoColumns": [
                 {
-                    "mData": "id"
-                },
-                {
                     "mData": "dateTime"
                 },
                 {
                     "mData": "description"
+                },
+                {
+                    "mData": "calories"
                 },
                 {
                     "sDefaultContent": "Edit",
