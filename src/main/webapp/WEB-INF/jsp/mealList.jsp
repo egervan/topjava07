@@ -50,12 +50,59 @@
                 </td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
-                <td><a href="meals/update?id=${meal.id}">Update</a></td>
+<%--            <td><a href="meals/update?id=${meal.id}">Update</a></td>
                 <td><a href="meals/delete?id=${meal.id}">Delete</a></td>
+--%>
+                <td><a class="btn btn-xs btn-primary edit" id="${meal.id}">Edit</a></td>
+                <td><a class="btn btn-xs btn-danger delete" id="${meal.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
+<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="webjars/noty/2.3.8/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
+<script type="text/javascript">
+
+    var ajaxUrl = 'ajax/meals/';
+    var datatableApi;
+
+    // $(document).ready(function () {
+    $(function () {
+        datatableApi = $('#datatable').dataTable({
+            "bPaginate": false,
+            "bInfo": false,
+            "aoColumns": [
+                {
+                    "mData": "id"
+                },
+                {
+                    "mData": "dateTime"
+                },
+                {
+                    "mData": "description"
+                },
+                {
+                    "sDefaultContent": "Edit",
+                    "bSortable": false
+                },
+                {
+                    "sDefaultContent": "Delete",
+                    "bSortable": false
+                }
+            ],
+            "aaSorting": [
+                [
+                    0,
+                    "asc"
+                ]
+            ]
+        });
+        makeEditable();
+    });
+</script>
 </html>
