@@ -56,7 +56,7 @@
                         </thead>
                         <c:forEach items="${mealList}" var="meal">
                             <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.UserMealWithExceed"/>
-                            <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
+                            <tr class="${meal.exceed ? 'exceeded' : 'normal'}" id="${meal.id}">
                                 <td>
                                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
                                         <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
@@ -67,8 +67,8 @@
                                     <%--            <td><a href="meals/update?id=${meal.id}">Update</a></td>
                                                     <td><a href="meals/delete?id=${meal.id}">Delete</a></td>
                                     --%>
-                                <td><a class="btn btn-xs btn-primary edit" id="${meal.id}">Edit</a></td>
-                                <td><a class="btn btn-xs btn-danger delete" id="${meal.id}">Delete</a></td>
+                                <td><a class="btn btn-xs btn-primary edit">Edit</a></td>
+                                <td><a class="btn btn-xs btn-danger delete">Delete</a></td>
                             </tr>
                         </c:forEach>
                     </table>
