@@ -30,10 +30,9 @@
         <button type="submit"><fmt:message key="meals.filter"/></button>
     </form>
     <hr>
-<%--
-    <a href="meals/create"><fmt:message key="meals.add"/></a>
---%>
-
+    <%--
+        <a href="meals/create"><fmt:message key="meals.add"/></a>
+    --%>
 
 
     <hr>
@@ -41,38 +40,39 @@
         <div class="container">
             <div class="shadow">
                 <h3><fmt:message key="meals.title"/></h3>
-                   <div class="view-box">
+                <div class="view-box">
+
                     <a class="btn btn-sm btn-info" id="add"><fmt:message key="meals.add"/></a>
 
                     <table class="table table-striped display" id="datatable">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Calories</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <c:forEach items="${mealList}" var="meal">
-            <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.UserMealWithExceed"/>
-            <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
-                <td>
-                        <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
-                        <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
-                        ${fn:formatDateTime(meal.dateTime)}
-                </td>
-                <td>${meal.description}</td>
-                <td>${meal.calories}</td>
-<%--            <td><a href="meals/update?id=${meal.id}">Update</a></td>
-                <td><a href="meals/delete?id=${meal.id}">Delete</a></td>
---%>
-                <td><a class="btn btn-xs btn-primary edit" id="${meal.id}">Edit</a></td>
-                <td><a class="btn btn-xs btn-danger delete" id="${meal.id}">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-                   </div>
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Calories</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <c:forEach items="${mealList}" var="meal">
+                            <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.to.UserMealWithExceed"/>
+                            <tr class="${meal.exceed ? 'exceeded' : 'normal'}">
+                                <td>
+                                        <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
+                                        <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
+                                        ${fn:formatDateTime(meal.dateTime)}
+                                </td>
+                                <td>${meal.description}</td>
+                                <td>${meal.calories}</td>
+                                    <%--            <td><a href="meals/update?id=${meal.id}">Update</a></td>
+                                                    <td><a href="meals/delete?id=${meal.id}">Delete</a></td>
+                                    --%>
+                                <td><a class="btn btn-xs btn-primary edit" id="${meal.id}">Edit</a></td>
+                                <td><a class="btn btn-xs btn-danger delete" id="${meal.id}">Delete</a></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -84,11 +84,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title"><fmt:message key="users.edit"/></h2>
+                <h2 class="modal-title"><fmt:message key="meals.edit"/></h2>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="post" id="detailsForm">
-                    <input type="text" hidden="hidden" id="id" name="id">
+                    <input type="number" hidden="hidden" id="id" name="id">
 
                     <div class="form-group">
                         <label for="description" class="control-label col-xs-3">Description</label>
