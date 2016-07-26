@@ -146,10 +146,10 @@
                     "mData": "id"
                 },
                 {
-                    "mData": "dateTime"
+                    "mData": "description"
                 },
                 {
-                    "mData": "description"
+                    "mData": "dateTime"
                 },
                 {
                     "sDefaultContent": "Edit",
