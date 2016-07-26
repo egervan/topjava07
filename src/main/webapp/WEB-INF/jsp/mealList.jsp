@@ -34,11 +34,17 @@
     <a href="meals/create"><fmt:message key="meals.add"/></a>
 --%>
 
-    <a class="btn btn-sm btn-info" id="add"><fmt:message key="meals.add"/></a>
 
 
     <hr>
-    <table border="1" cellpadding="8" cellspacing="0" id="datatable">
+    <div class="jumbotron">
+        <div class="container">
+            <div class="shadow">
+                <h3><fmt:message key="meals.title"/></h3>
+                   <div class="view-box">
+                    <a class="btn btn-sm btn-info" id="add"><fmt:message key="meals.add"/></a>
+
+                    <table class="table table-striped display" id="datatable">
         <thead>
         <tr>
             <th>Date</th>
@@ -66,6 +72,10 @@
             </tr>
         </c:forEach>
     </table>
+                   </div>
+            </div>
+        </div>
+    </div>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 

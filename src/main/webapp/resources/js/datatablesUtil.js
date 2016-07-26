@@ -1,6 +1,13 @@
 function makeEditable() {
     $('#add').click(function () {
         $('#id').val(0);
+       $('#description').val(0);
+
+        // var dt = new Date($.now());
+    //    $('#dateTime').val(dt.toISOString().slice(0, 19) + 'Z');
+    //    $('#dateTime').val("2016-07-26T07:41");
+        var dateTime = $('#dateTime').val();
+        $('#dateTime').val(new Date().toISOString().slice(0, 19));
         $('#editRow').modal();
     });
 
