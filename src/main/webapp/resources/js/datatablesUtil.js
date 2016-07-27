@@ -11,6 +11,18 @@ function makeEditable() {
     $('.delete').click(function () {
         deleteRow($(this).parents('tr').attr("id"));
     });
+    
+    $('.enabled').click(function () {
+
+        /*
+         $('#id').val($(this).parents('tr').attr("id"));
+         $('#name').val($(this).parents('tr').children('#nameRow').text())
+         $('#email').val($(this).parents('tr').children('#emailRow').text())
+         */
+        var id = $(this).parents('tr').attr("id");
+        var enabled = $(this).is(':checked') //!$(this).attr('value')
+        enableUser(id, enabled);
+    });
 
     /*
      $('.edit').click(function () {
@@ -31,6 +43,20 @@ function makeEditable() {
         failNoty(event, jqXHR, options, jsExc);
     });
 }
+
+
+function enableUser(id, enabled) {
+    $.ajax({
+        type: "PUT",
+        url: ajaxUrl + id,
+        data: "" +  qenabled,
+        success: function () {
+            updateTable();
+            successNoty(enabled === true ? 'User Enabled' : 'User Diabled');
+        }
+    });
+}
+
 
 function deleteRow(id) {
     $.ajax({
