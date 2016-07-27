@@ -13,16 +13,43 @@ function makeEditable() {
     });
     
     $('.enabled').click(function () {
+        //    var form = $('#detailsForm');
+         debugger;
+         var id = $(this).parents('tr').attr("id");
+         var name = $(this).parents('tr').find('#nameRow').text();
+         var password = $(this).parents('tr').attr("password");
+         var email = $(this).parents('tr').children('#emailRow').text();
+         var enabled = $(this).is(':checked') //!$(this).attr('value')
+        //  var password = $(this).parents('tr').children('#passwordRow').text();
 
-        /*
-         $('#id').val($(this).parents('tr').attr("id"));
-         $('#name').val($(this).parents('tr').children('#nameRow').text())
-         $('#email').val($(this).parents('tr').children('#emailRow').text())
-         */
-        var id = $(this).parents('tr').attr("id");
-        var enabled = $(this).is(':checked') //!$(this).attr('value')
-        enableUser(id, enabled);
+/*        form.find('#id').val($(this).parents('tr').attr("id"));
+        form.find('#name').val($(this).parents('tr').children('#nameRow').text())
+      // form.find('#id').val(123);
+   //    form.find('#name').val("sdfaadf")
+         form.find('#email').val($(this).parents('tr').children('#emailRow').text())
+         form.find('#password').val($(this).parents('tr').children('#passwordRow').text())
+         form.find('#enabled').val($(this).parents('tr').children('#enabled')())
+ */       //      var id = $(this).parents('tr').attr("id");
+
+        save(id, name, email, password, enabled);
     });
+
+    function save(id, name, email, password, enabled) {
+        $.ajax({
+            type: "POST",
+            url: ajaxUrl,
+            data: {"id":id,
+                   "name" : name,
+                   "email" : email,
+                   "password" : password,
+                   "enabled" : enabled},
+            success: function () {
+                $('#editRow').modal('hide');
+                updateTable();
+                successNoty(enabled === true ? 'User Enabled' : 'User Disabled');
+            }
+        });
+    }
 
     /*
      $('.edit').click(function () {
@@ -81,7 +108,6 @@ function updateTable() {
 
 function save() {
     var form = $('#detailsForm');
-    debugger;
     $.ajax({
         type: "POST",
         url: ajaxUrl,
