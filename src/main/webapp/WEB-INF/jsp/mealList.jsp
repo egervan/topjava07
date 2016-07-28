@@ -10,22 +10,22 @@
     <h3><fmt:message key="meals.title"/></h3>
 
 
-    <form method="post" action="meals/filter">
+    <form method="post" id="filter"<%--action="meals/filter"--%>>
         <dl>
             <dt>From Date:</dt>
-            <dd><input type="date" name="startDate" value="${startDate}"></dd>
+            <dd><input type="date" name="startDate" id="startDate" value="${startDate}"></dd>
         </dl>
         <dl>
             <dt>To Date:</dt>
-            <dd><input type="date" name="endDate" value="${endDate}"></dd>
+            <dd><input type="date" name="endDate" id="endDate" value="${endDate}"></dd>
         </dl>
         <dl>
             <dt>From Time:</dt>
-            <dd><input type="time" name="startTime" value="${startTime}"></dd>
+            <dd><input type="time" name="startTime" id="startTime" value="${startTime}"></dd>
         </dl>
         <dl>
             <dt>To Time:</dt>
-            <dd><input type="time" name="endTime" value="${endTime}"></dd>
+            <dd><input type="time" name="endTime" id="endTime" value="${endTime}"></dd>
         </dl>
         <button type="submit"><fmt:message key="meals.filter"/></button>
     </form>
@@ -143,13 +143,13 @@
             "bInfo": false,
             "aoColumns": [
                 {
-                    "mData": "id"
+                    "mData": "dateTime"
                 },
                 {
                     "mData": "description"
                 },
                 {
-                    "mData": "dateTime"
+                    "mData": "calories"
                 },
                 {
                     "sDefaultContent": "Edit",

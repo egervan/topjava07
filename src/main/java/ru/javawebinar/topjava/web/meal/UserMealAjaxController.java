@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -16,10 +18,17 @@ import java.util.List;
 @RequestMapping("/ajax/meals")
 public class UserMealAjaxController extends AbstractUserMealController {
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+   /* @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserMealWithExceed> getAll()
     {
         return super.getAll();
+    }*/
+
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserMealWithExceed> getBetween(
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate, @RequestParam(value = "startTime", required = false)  @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime startTime,
+            @RequestParam(value = "endDate", required = false)   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,   @RequestParam(value = "endTime", required = false)    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime endTime) {
+        return super.getBetween(startDate, startTime, endDate, endTime);
     }
 
     @RequestMapping(value="{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,7 +48,6 @@ public class UserMealAjaxController extends AbstractUserMealController {
                                @RequestParam("description") String description,
                                @RequestParam("dateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
                                @RequestParam("calories") Integer calories) {
-       // LocalDateTime dt = LocalDateTime.parse(dateTime);
         UserMeal meal = new UserMeal(id, dateTime, description, calories);
         if(meal.isNew()) {
             super.create(meal);

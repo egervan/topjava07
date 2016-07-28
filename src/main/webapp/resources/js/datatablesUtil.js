@@ -40,24 +40,10 @@ function makeEditable() {
      save(data.id, data.name, data.email, data.password, data.enabled);
      });
      */
-}
 
-function enable(id, name, email, password, enabled) {
-    debugger;
-    $.ajax({
-        type: "POST",
-        url: ajaxUrl,
-        data: {"id":id,
-            "name" : name,
-            "email" : email,
-            "password" : password,
-            "enabled" : !enabled},
-        success: function () {
-            $('#editRow').modal('hide');
-            updateTable();
-            successNoty(enabled === true ? 'User Enabled' : 'User Disabled');
-        }
-    });
+
+    
+    
 
     /*
      $('.edit').click(function () {
@@ -68,6 +54,21 @@ function enable(id, name, email, password, enabled) {
      $('#editRow').modal();
      });
      */
+
+    $('#filter').submit(function () {
+        debugger;
+        // var form = $('#filter');
+
+       /* $.get(ajaxUrl, {startDate : startDate, startTime : startTime, endDate : endDate, endTime : endTime}, function (data) {
+            datatableApi.fnClearTable();
+            $.each(data, function (key, item) {
+                datatableApi.fnAddData(item);
+            });
+            datatableApi.fnDraw();
+        });*/
+        updateTable();
+        return false;
+    });
 
     $('#detailsForm').submit(function () {
         save();
@@ -80,18 +81,38 @@ function enable(id, name, email, password, enabled) {
 }
 
 
-function enableUser(id, enabled) {
+function enable(id, name, email, password, enabled) {
+    debugger;
     $.ajax({
-        type: "PUT",
-        url: ajaxUrl + id,
-        data: "" +  qenabled,
+        type: "POST",
+        url: ajaxUrl,
+        data: {
+            "id": id,
+            "name": name,
+            "email": email,
+            "password": password,
+            "enabled": !enabled
+        },
         success: function () {
+            $('#editRow').modal('hide');
             updateTable();
-            successNoty(enabled === true ? 'User Enabled' : 'User Diabled');
+            successNoty(enabled === true ? 'User Enabled' : 'User Disabled');
         }
     });
 }
 
+
+    function enableUser(id, enabled) {
+        $.ajax({
+            type: "PUT",
+            url: ajaxUrl + id,
+            data: "" + qenabled,
+            success: function () {
+                updateTable();
+                successNoty(enabled === true ? 'User Enabled' : 'User Diabled');
+            }
+        });
+    }
 
 function deleteRow(id) {
     $.ajax({
@@ -105,7 +126,13 @@ function deleteRow(id) {
 }
 
 function updateTable() {
-    $.get(ajaxUrl, function (data) {
+
+    var startDate = $('#startDate').val();
+    var endDate = $('#endDate').val();
+    var startTime = $('#startTime').val();
+    var endTime = $('#endTime').val();
+
+    $.get(ajaxUrl, {startDate : startDate, startTime : startTime, endDate : endDate, endTime : endTime}, function (data) {
         datatableApi.fnClearTable();
         $.each(data, function (key, item) {
             datatableApi.fnAddData(item);
