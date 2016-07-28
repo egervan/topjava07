@@ -11,49 +11,53 @@ function makeEditable() {
     $('.delete').click(function () {
         deleteRow($(this).parents('tr').attr("id"));
     });
-    
-    $('.enabled').click(function () {
-        //    var form = $('#detailsForm');
-         debugger;
-/*
-         var id = $(this).parents('tr').attr("id");
-         var name = $(this).parents('tr').find('#nameRow').text();
-         var password = $(this).parents('tr').attr("password");
-         var email = $(this).parents('tr').children('#emailRow').text();
-         var enabled = $(this).is(':checked')
-*/
+    /*
+     $('.enabled').click(function () {
+     //    var form = $('#detailsForm');
+     debugger;
+     /!*
+     var id = $(this).parents('tr').attr("id");
+     var name = $(this).parents('tr').find('#nameRow').text();
+     var password = $(this).parents('tr').attr("password");
+     var email = $(this).parents('tr').children('#emailRow').text();
+     var enabled = $(this).is(':checked')
+     *!/
 
-        var data = dataTableApi.row($(this).closest('tr')).data();
+     /!*
+     var data = dataTableApi.row($(this).closest('tr')).data();
+     *!/
 
-        //  var password = $(this).parents('tr').children('#passwordRow').text();
-/*        form.find('#id').val($(this).parents('tr').attr("id"));
-        form.find('#name').val($(this).parents('tr').children('#nameRow').text())
-      // form.find('#id').val(123);
-   //    form.find('#name').val("sdfaadf")
-         form.find('#email').val($(this).parents('tr').children('#emailRow').text())
-         form.find('#password').val($(this).parents('tr').children('#passwordRow').text())
-         form.find('#enabled').val($(this).parents('tr').children('#enabled')())
- */       //      var id = $(this).parents('tr').attr("id");
+     //  var password = $(this).parents('tr').children('#passwordRow').text();
+     /!*        form.find('#id').val($(this).parents('tr').attr("id"));
+     form.find('#name').val($(this).parents('tr').children('#nameRow').text())
+     // form.find('#id').val(123);
+     //    form.find('#name').val("sdfaadf")
+     form.find('#email').val($(this).parents('tr').children('#emailRow').text())
+     form.find('#password').val($(this).parents('tr').children('#passwordRow').text())
+     form.find('#enabled').val($(this).parents('tr').children('#enabled')())
+     *!/       //      var id = $(this).parents('tr').attr("id");
 
-        save(data.id, data.name, data.email, data.password, data.enabled);
+     save(data.id, data.name, data.email, data.password, data.enabled);
+     });
+     */
+}
+
+function enable(id, name, email, password, enabled) {
+    debugger;
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl,
+        data: {"id":id,
+            "name" : name,
+            "email" : email,
+            "password" : password,
+            "enabled" : !enabled},
+        success: function () {
+            $('#editRow').modal('hide');
+            updateTable();
+            successNoty(enabled === true ? 'User Enabled' : 'User Disabled');
+        }
     });
-
-    function save(id, name, email, password, enabled) {
-        $.ajax({
-            type: "POST",
-            url: ajaxUrl,
-            data: {"id":id,
-                   "name" : name,
-                   "email" : email,
-                   "password" : password,
-                   "enabled" : enabled},
-            success: function () {
-                $('#editRow').modal('hide');
-                updateTable();
-                successNoty(enabled === true ? 'User Enabled' : 'User Disabled');
-            }
-        });
-    }
 
     /*
      $('.edit').click(function () {
