@@ -32,13 +32,14 @@
                     </thead>
                     <c:forEach items="${userList}" var="user">
                         <jsp:useBean id="user" scope="page" type="ru.javawebinar.topjava.model.User"/>
-                        <tr id="${user.id}" password="${user.password}">
+                        <tr id="${user.id}" <%--password="${user.password}"--%>>
                             <td id="nameRow"><c:out value="${user.name}"/></td>
                             <td id="emailRow"><a href="mailto:${user.email}">${user.email}</a></td>
                             <td id="rolesRow">${user.roles}</td>
                             <td>
                                 <input type="checkbox" class="enabled" value="${user.enabled}"
-                                       <c:if test="${user.enabled}">checked</c:if>/>
+                                       <c:if test="${user.enabled}">checked</c:if>
+                                       onclick="enable(${user.id}, '${user.name}', '${user.email}', '${user.password}', ${user.enabled})"/>
                             </td>
                             <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
                             <td><a class="btn btn-xs btn-primary edit">Edit</a></td>

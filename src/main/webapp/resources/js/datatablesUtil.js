@@ -15,13 +15,17 @@ function makeEditable() {
     $('.enabled').click(function () {
         //    var form = $('#detailsForm');
          debugger;
+/*
          var id = $(this).parents('tr').attr("id");
          var name = $(this).parents('tr').find('#nameRow').text();
          var password = $(this).parents('tr').attr("password");
          var email = $(this).parents('tr').children('#emailRow').text();
-         var enabled = $(this).is(':checked') //!$(this).attr('value')
-        //  var password = $(this).parents('tr').children('#passwordRow').text();
+         var enabled = $(this).is(':checked')
+*/
 
+        var data = dataTableApi.row($(this).closest('tr')).data();
+
+        //  var password = $(this).parents('tr').children('#passwordRow').text();
 /*        form.find('#id').val($(this).parents('tr').attr("id"));
         form.find('#name').val($(this).parents('tr').children('#nameRow').text())
       // form.find('#id').val(123);
@@ -31,7 +35,7 @@ function makeEditable() {
          form.find('#enabled').val($(this).parents('tr').children('#enabled')())
  */       //      var id = $(this).parents('tr').attr("id");
 
-        save(id, name, email, password, enabled);
+        save(data.id, data.name, data.email, data.password, data.enabled);
     });
 
     function save(id, name, email, password, enabled) {
