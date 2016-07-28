@@ -49,7 +49,7 @@ function enableUser(id, enabled) {
     $.ajax({
         type: "PUT",
         url: ajaxUrl + id,
-        data: "" +  qenabled,
+        data: "" +  enabled,
         success: function () {
             updateTable();
             successNoty(enabled === true ? 'User Enabled' : 'User Diabled');
