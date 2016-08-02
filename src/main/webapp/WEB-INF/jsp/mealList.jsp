@@ -112,7 +112,7 @@
 
                         <div class="col-xs-9">
                             <input type="number" class="form-control" id="calories" name="calories"
-                                   placeholder="2000">
+                                   placeholder="2000" required>
                         </div>
                     </div>
                     <div class="form-group">
