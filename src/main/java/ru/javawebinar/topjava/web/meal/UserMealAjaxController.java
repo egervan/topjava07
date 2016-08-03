@@ -41,6 +41,11 @@ public class UserMealAjaxController extends AbstractUserMealController {
         super.delete(id);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public UserMeal get(@PathVariable("id") int id) {
+        return super.get(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<String>  updateOrCreate(@Valid UserMeal meal, BindingResult result/*@RequestParam("id") Integer id,
                                @RequestParam("dateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateTime,
