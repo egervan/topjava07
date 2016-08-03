@@ -11,6 +11,7 @@ function updateTable() {
     return false;
 }
 
+
 $(function () {
     datatableApi = $('#datatable').DataTable({
         "ajax": {

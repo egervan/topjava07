@@ -1,4 +1,7 @@
 var form;
+/*
+var $j = jQuery.noConflict();
+*/
 
 function makeEditable() {
     form = $('#detailsForm');
@@ -11,6 +14,10 @@ function makeEditable() {
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(event, jqXHR, options, jsExc);
     });
+
+    $('#dateTime').datetimepicker();
+
+
 }
 
 function add() {
@@ -69,6 +76,11 @@ function save() {
     });
 }
 
+$('#startDate').datepicker();
+$('#endDate').datepicker();
+$('#startTime').timepicker();
+$('#endTime').timepicker();
+
 var failedNote;
 
 function closeNoty() {
@@ -110,3 +122,6 @@ function renderDeleteBtn(data, type, row) {
     }
     return data;
 }
+
+
+
