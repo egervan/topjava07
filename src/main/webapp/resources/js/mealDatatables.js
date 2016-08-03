@@ -12,13 +12,23 @@ function updateTable() {
 }
 
 $(function () {
-    datatableApi = $('#datatable').DataTable(
-        {
+    datatableApi = $('#datatable').DataTable({
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
             "paging": false,
             "info": true,
             "columns": [
                 {
-                    "data": "dateTime"
+                    "data": "dateTime",
+                   /* "render": function (date, type, row) {
+                        if (type == 'display') {
+                            var dateObject = new Date(date);
+                            return '<span>' + dateObject.toISOString().substring(0, 16) + '</span>';
+                        }
+                        return date;
+                    }*/
                 },
                 {
                     "data": "description"
@@ -27,12 +37,14 @@ $(function () {
                     "data": "calories"
                 },
                 {
-                    "defaultContent": "Edit",
-                    "orderable": false
+                    "orderable": false,
+                    "defaultContent": "",
+                    "render": renderEditBtn
                 },
                 {
-                    "defaultContent": "Delete",
-                    "orderable": false
+                    "orderable": false,
+                    "defaultContent": "",
+                    "render": renderDeleteBtn
                 }
             ],
             "order": [
