@@ -52,7 +52,14 @@ $(function () {
                     0,
                     "desc"
                 ]
-            ]
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.exceed) {
+                    $(row).addClass("exceeded");
+                }
+                else
+                    $(row).addClass("normal");
+        },
         });
 
     $('#filter').submit(function () {
