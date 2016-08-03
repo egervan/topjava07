@@ -22,13 +22,13 @@ $(function () {
             "columns": [
                 {
                     "data": "dateTime",
-                   /* "render": function (date, type, row) {
+                    "render": function (date, type, row) {
                         if (type == 'display') {
                             var dateObject = new Date(date);
-                            return '<span>' + dateObject.toISOString().substring(0, 16) + '</span>';
+                            return '<span>' + dateObject.toISOString().replace('T', ' ').substring(0, 16) + '</span>';
                         }
                         return date;
-                    }*/
+                    }
                 },
                 {
                     "data": "description"
