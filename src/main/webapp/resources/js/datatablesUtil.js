@@ -49,6 +49,11 @@ function add() {
 function updateRow(id) {
     $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
+            if(key == 'dateTime')
+            {
+                var dateObject = new Date(value);
+                value = dateObject.toISOString().replace('T', ' ').substring(0, 16);
+            }
             form.find("input[name='" + key + "']").val(value);
         });
         $('#editRow').modal();
