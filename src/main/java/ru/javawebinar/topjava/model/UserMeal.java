@@ -36,7 +36,7 @@ public class UserMeal extends BaseEntity {
 
     @Column(name = "date_time", nullable = false)
     @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @DateTimeFormat(pattern="YYYY/MM/DD HH:MM")
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)

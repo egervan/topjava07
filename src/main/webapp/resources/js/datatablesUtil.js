@@ -15,7 +15,27 @@ function makeEditable() {
         failNoty(event, jqXHR, options, jsExc);
     });
 
-    $('#dateTime').datetimepicker();
+    $('#dateTime').datetimepicker({
+
+    });
+    $('#startDate').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d'
+    });
+    $('#endDate').datetimepicker({
+        timepicker:false,
+        format:'Y-m-d'
+    });
+    $('#startTime').datetimepicker(
+        {
+            datepicker:false,
+            format:'H:i'
+        }
+    );
+    $('#endTime').datetimepicker({
+        datepicker:false,
+        format:'H:i'
+    });
 
 
 }
@@ -76,10 +96,7 @@ function save() {
     });
 }
 
-$('#startDate').datepicker();
-$('#endDate').datepicker();
-$('#startTime').timepicker();
-$('#endTime').timepicker();
+
 
 var failedNote;
 
