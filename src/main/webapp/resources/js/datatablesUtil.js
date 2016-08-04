@@ -16,7 +16,7 @@ function makeEditable() {
     });
 
     $('#dateTime').datetimepicker({
-
+        format:'Y-m-d H:m'
     });
     $('#startDate').datetimepicker({
         timepicker:false,
