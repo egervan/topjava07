@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by Jager on 07.08.2016.
  */
-@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "no data found") //422
+@ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY, reason = "not valid data") //422
 public class UnProcessableEntityException extends RuntimeException {
     public UnProcessableEntityException(String message)
     {
