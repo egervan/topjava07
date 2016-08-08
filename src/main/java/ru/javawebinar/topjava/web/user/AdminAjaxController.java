@@ -27,12 +27,12 @@ import java.util.List;
 public class AdminAjaxController extends AbstractUserController implements ExceptionInfoHandler {
 
     @Override
-    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "User with this email already present in application")  // 409
+    @ResponseStatus(value = HttpStatus.CONFLICT)  // 409
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseBody
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
-        return logAndGetErrorInfo(req, e, true);
+        return logAndGetErrorInfo(req, new DataIntegrityViolationException("User with this email already present in application"), true);
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
