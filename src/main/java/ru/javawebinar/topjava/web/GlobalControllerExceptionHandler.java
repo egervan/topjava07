@@ -4,10 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javawebinar.topjava.AuthorizedUser;
+import ru.javawebinar.topjava.util.exception.ErrorInfo;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,6 +36,21 @@ public class GlobalControllerExceptionHandler {
         if (authorizedUser != null) {
             mav.addObject("userTo", authorizedUser.getUserTo());
         }
+        return mav;
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @Order(Ordered.LOWEST_PRECEDENCE - 1)
+    ModelAndView conflict(HttpServletRequest req, DataIntegrityViolationException e) {
+        LOG.error("User with this email already present in application" + req.getRequestURL(), e);
+        ModelAndView mav = new ModelAndView("exception/exception");
+        mav.addObject("exception", new DataIntegrityViolationException("User with this email already present in application"));
+
+        AuthorizedUser authorizedUser = AuthorizedUser.safeGet();
+        if (authorizedUser != null) {
+            mav.addObject("userTo", authorizedUser.getUserTo());
+        }
+
         return mav;
     }
 }
