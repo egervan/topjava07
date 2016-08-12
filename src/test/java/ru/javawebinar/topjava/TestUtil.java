@@ -1,5 +1,7 @@
 package ru.javawebinar.topjava;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
@@ -27,12 +29,8 @@ public class TestUtil {
         return SecurityMockMvcRequestPostProcessors.httpBasic(user.getEmail(), user.getPassword());
     }
 
-    /**
-     * Compare entities using toString
-     */
-    public static class ToStringModelMatcher<T> extends ModelMatcher<T, String> {
-        public ToStringModelMatcher(Class<T> entityClass) {
-            super(Object::toString, entityClass);
-        }
+    public static void authorize(User user) {
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
     }
 }
